@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION =1;
     // Database Name
     private static final String DATABASE_NAME = "dressing.db";
-    private static final String TAG = DBHelper.class.getSimpleName().toString();
+    private static final String TAG = DBHelper.class.getSimpleName();
 
     public DBHelper( ) {
         super(App.getContext(), DATABASE_NAME, null, DATABASE_VERSION);

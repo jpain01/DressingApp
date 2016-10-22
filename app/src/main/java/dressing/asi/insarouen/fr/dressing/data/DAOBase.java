@@ -14,6 +14,8 @@ public class DAOBase {
     protected SQLiteDatabase mDb = null;
     protected DBHelper mHelper = null;
 
+    public DAOBase(){}
+
     public DAOBase(DBHelper helper) {
         this.mHelper = helper;
     }
