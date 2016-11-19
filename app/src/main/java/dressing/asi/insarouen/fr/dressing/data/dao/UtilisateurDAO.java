@@ -1,6 +1,7 @@
 package dressing.asi.insarouen.fr.dressing.data.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -25,20 +26,27 @@ public class UtilisateurDAO extends DAOBase {
     public static final String COULEUR_PREFEREE = "couleurPreferee";
     public static final String MORPHOLOGIE = "signe";
 
+    public UtilisateurDAO(Context pContext) {
+        super(pContext);
+    }
+
     public static String createTable(){
         return "CREATE TABLE " + TABLE_NAME  + "("
-                + KEY + " SERIAL PRIMARY KEY ,"
+                + KEY + " SERIAL PRIMARY KEY AUTOINCREMENT ,"
                 + NOM + " VARCHAR(20) NOT NULL,"
                 + PRENOM + " VARCHAR(20) NOT NULL,"
                 + AGE + " INTEGER NOT NULL,"
                 + TAILLE + " INTEGER NOT NULL,"
-                + LOGIN + " INTEGER NOT NULL,"
-                + PASSWORD + " INTEGER NOT NULL,"
-                + COULEUR_CHEVEUX + " INTEGER NOT NULL,"
+                + LOGIN + " VARCHAR(20) NOT NULL,"
+                + PASSWORD + " VARCHAR(20) NOT NULL,"
+                + COULEUR_CHEVEUX + " VARCHAR(20) NOT NULL CHECK ("+ COULEUR_CHEVEUX +" IN ('Blond','Brun','Roux','Chatain')),"
                 + COULEUR_PREFEREE + " INTEGER NOT NULL,"
-                + MORPHOLOGIE + " INTEGER NOT NULL,"
-                + "CHECK ("+ COULEUR_CHEVEUX +" IN ('Blond','Brun','Roux','Chatain')))"
+                + MORPHOLOGIE + " VARCHAR(5) NOT NULL REFERENCES FORME(signe) ON DELETE CASCADE );"
                 ;
+    }
+
+    public static String dropTable(){
+        return "DROP TABLE " + TABLE_NAME  + ";";
     }
 
     public void insert(Utilisateur u){

@@ -9,32 +9,21 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DAOBase {
-    private Integer mOpenCounter = 0;
 
     protected SQLiteDatabase mDb = null;
     protected DBHelper mHelper = null;
 
-    public DAOBase(){}
-
-    public DAOBase(DBHelper helper) {
-        this.mHelper = helper;
+    public DAOBase(Context pContext){
+        this.mHelper = new DBHelper(pContext);
     }
 
     public SQLiteDatabase open() {
-        mOpenCounter+=1;
-        if(mOpenCounter == 1) {
-            // Opening new database
-            mDb = mHelper.getWritableDatabase();
-        }
+        mDb = mHelper.getWritableDatabase();
         return mDb;
     }
 
     public void close() {
-        mOpenCounter-=1;
-        if(mOpenCounter == 0) {
-            // Closing database
-            mDb.close();
-        }
+        mDb.close();
     }
 
     public SQLiteDatabase getDb() {

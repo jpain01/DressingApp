@@ -1,6 +1,7 @@
 package dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,29 +13,46 @@ import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Pantalon;
  */
 
 public class PantalonDAO extends VetementDAO {
-    public static final String TABLE_GRAN_PARENT = "CONTENU";
-    public static final String TABLE_PARENT = "VETEMENT";
     public static final String TABLE_NAME = "PANTALON";
     public static final String KEY = "idObjet";
+    public static final String DRESSING = "idDressing";
+    public static final String COULEUR = "couleur";
     public static final String MATIERE = "matiere";
+    public static final String COUCHE = "couche";
+    public static final String NIVEAU = "niveau";
+    public static final String SALE_PROPRE = "sale_propre";
     public static final String IMAGE = "image";
     public static final String TYPE = "typeP";
     public static final String COUPE = "coupeP";
 
+    public PantalonDAO(Context pContext) {
+        super(pContext);
+    }
+
     public static String createTable(){
         return "CREATE TABLE " + TABLE_NAME  + "("
-                + TYPE + " VARCHAR(20) NOT NULL,"
-                + COUPE + " VARCHAR(20) NOT NULL,"
-                + "CHECK ("+ TYPE +" IN ('Pantalon','Pantacourt','Jogging')),"
-                + "CHECK ("+ COUPE +" IN ('Slim','Droit','Evase','Baggy'))"
-                + ")INHERITS("+ TABLE_PARENT +");"
+                + KEY + " PRIMARY KEY AUTOINCREMENT,"
+                + DRESSING + " INTEGER REFERENCES DRESSING(idDressing) ON DELETE CASCADE,"
+                + COULEUR + " INTEGER NOT NULL,"
+                + MATIERE + " VARCHAR(30) REFERENCES MATIERE_SAISON(matiere) ON DELETE CASCADE CHECK ("+ MATIERE +" IN ('Laine','Coton','Jean','Lin','Velours','Cuir','Dentelle','Daim', 'Satin','Paillete')),"
+                + COUCHE + " INTEGER NOT NULL CHECK (couche>0 AND couche<4),"
+                + NIVEAU + " VARCHAR(20) NOT NULL CHECK (niveau IN ('Haut','Bas','Hautbas')),"
+                + SALE_PROPRE + " BOOLEAN NOT NULL,"
+                + IMAGE + " VARCHAR(200),"
+                + TYPE + " VARCHAR(20) NOT NULL CHECK ("+ TYPE +" IN ('Pantalon','Pantacourt','Jogging')),"
+                + COUPE + " VARCHAR(20) NOT NULL CHECK ("+ COUPE +" IN ('Slim','Droit','Evase','Baggy'))"
+                + ");"
                 ;
+    }
+
+    public static String dropTable(){
+        return "DROP TABLE " + TABLE_NAME  + ";";
     }
 
     public void insert(Pantalon p){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_GRAN_PARENT, new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_NAME, new String[]{});
         while(res.moveToNext()){
             id = res.getInt(1)+1;
         }
@@ -53,10 +71,10 @@ public class PantalonDAO extends VetementDAO {
         mDb.close();
 
         // Certtains attributs sont calculés automatiquement, il faut donc les attribuer à l'objet après la requête
-        p.setNiveau(getNiveau(p));
-        p.setCouche(getCouche(p));
-        p.setSale(getSalePropre(p));
-        p.setSignes(getSignes(p));
+        p.setNiveau(this.getNiveau(p));
+        p.setCouche(this.getCouche(p));
+        p.setSale(this.getSalePropre(p));
+        p.setSignes(this.getSignes(p));
     }
 
     public void delete(long id) {

@@ -1,6 +1,7 @@
 package dressing.asi.insarouen.fr.dressing.data.dao.contenu;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -13,7 +14,6 @@ import dressing.asi.insarouen.fr.dressing.data.model.contenu.Sac;
  */
 
 public class SacDAO extends ContenuDAO {
-    public static final String TABLE_PARENT = "CONTENU";
     public static final String TABLE_NAME = "SAC";
     public static final String KEY = "idObjet";
     public static final String DRESSING = "idDressing";
@@ -21,19 +21,29 @@ public class SacDAO extends ContenuDAO {
     public static final String TYPE = "typeS";
     public static final String IMAGE = "image";
 
+    public SacDAO(Context pContext) {
+        super(pContext);
+    }
+
     public static String createTable(){
         return "CREATE TABLE " + TABLE_NAME  + "("
-                + TYPE + " VARCHAR(20) NOT NULL,"
-                + IMAGE + " VARCHAR(200) ,"
-                + "CHECK ("+ TYPE +" IN ('Sacados','Sacamain','Pochette'))"
-                + ")INHERITS("+ TABLE_PARENT +");"
+                + KEY + " PRIMARY KEY AUTOINCREMENT,"
+                + DRESSING + " INTEGER REFERENCES DRESSING(idDressing) ON DELETE CASCADE,"
+                + COULEUR + "INTEGER NOT NULL,"
+                + TYPE + " VARCHAR(20) NOT NULL CHECK ("+ TYPE +" IN ('Sacados','Sacamain','Pochette')),"
+                + IMAGE + " VARCHAR(200) "
+                + ");"
                 ;
+    }
+
+    public static String dropTable(){
+        return "DROP TABLE " + TABLE_NAME  + ";";
     }
 
     public void insert(Sac s){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_PARENT , new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_NAME , new String[]{});
         while(res.moveToNext()){
             id = res.getInt(1)+1;
         }

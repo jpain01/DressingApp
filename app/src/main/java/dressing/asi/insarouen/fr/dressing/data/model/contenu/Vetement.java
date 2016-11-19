@@ -1,6 +1,9 @@
 package dressing.asi.insarouen.fr.dressing.data.model.contenu;
 
 import dressing.asi.insarouen.fr.dressing.data.model.Contenu;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Autre;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Haut;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Pantalon;
 import dressing.asi.insarouen.fr.dressing.elements.Couleur;
 import dressing.asi.insarouen.fr.dressing.elements.vetement.Matiere;
 import dressing.asi.insarouen.fr.dressing.elements.utilisateur.Morphologie;
@@ -68,4 +71,17 @@ public class Vetement extends Contenu {
     public void setSignes(Morphologie[] signes) {
         this.signes = signes;
     }
+
+    public boolean isAutre() {
+        return this instanceof Autre;
+    }
+
+    public boolean isHaut() {
+        return this instanceof Haut;
+    }
+
+    public boolean isPantalon() {
+        return this instanceof Pantalon;
+    }
+
 }

@@ -25,18 +25,38 @@ public class Autre extends Vetement {
         this.coupeA = coupeA;
     }
 
+    /**
+     * getTypeA permet de connaître le type du vêtement
+     *
+     * @return TypeAutre
+     */
     public TypeAutre getTypeA() {
         return typeA;
     }
 
+    /**
+     * setTypeA permet d'attribuer le type au vêtement
+     *
+     * @param typeA
+     */
     public void setTypeA(TypeAutre typeA) {
         this.typeA = typeA;
     }
 
+    /**
+     * getCoupeA permet de connaître la coupe du vêtement
+     *
+     * @return CoupeAutre
+     */
     public CoupeAutre getCoupeA() {
         return coupeA;
     }
 
+    /**
+     * setCoupeA permet d'attribuer la coupe au vêtement
+     *
+     * @param coupeA
+     */
     public void setCoupeA(CoupeAutre coupeA) {
         this.coupeA = coupeA;
     }
