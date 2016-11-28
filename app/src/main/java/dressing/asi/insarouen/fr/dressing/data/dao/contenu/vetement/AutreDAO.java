@@ -29,32 +29,12 @@ public class AutreDAO extends VetementDAO {
         super(pContext);
     }
 
-    public static String createTable(){
-        return "CREATE TABLE " + TABLE_NAME  + "("
-                + KEY + " PRIMARY KEY AUTOINCREMENT,"
-                + DRESSING + " INTEGER REFERENCES DRESSING(idDressing) ON DELETE CASCADE,"
-                + COULEUR + " INTEGER NOT NULL,"
-                + MATIERE + " VARCHAR(30) REFERENCES MATIERE_SAISON(matiere) ON DELETE CASCADE CHECK ("+ MATIERE +" IN ('Laine','Coton','Jean','Lin','Velours','Cuir','Dentelle','Daim', 'Satin','Paillete')),"
-                + COUCHE + " INTEGER NOT NULL CHECK (couche>0 AND couche<4),"
-                + NIVEAU + " VARCHAR(20) NOT NULL CHECK (niveau IN ('Haut','Bas','Hautbas')),"
-                + SALE_PROPRE + " BOOLEAN NOT NULL,"
-                + IMAGE + " VARCHAR(200),"
-                + TYPE + " VARCHAR(20) NOT NULL CHECK ("+ TYPE +" IN ('Jupe','Short','Robe','Combinaison')),"
-                + COUPE + " VARCHAR(20) NOT NULL CHECK ("+ COUPE +" IN ('Long','Court'))"
-                + ");"
-                ;
-    }
-
-    public static String dropTable(){
-        return "DROP TABLE " + TABLE_NAME  + ";";
-    }
-
     public void insert(Autre a){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_NAME, new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ")  FROM " + TABLE_NAME+";", new String[]{});
         while(res.moveToNext()){
-            id = res.getInt(1)+1;
+            id = res.getInt(0)+1;
         }
         a.setIdObjet(id);
         res.close();
@@ -63,7 +43,8 @@ public class AutreDAO extends VetementDAO {
         values.put(KEY, a.getIdObjet());
         values.put(DRESSING, a.getIdDressing());
         values.put(COULEUR, a.getCouleur().getCouleur());
-        values.put(MATIERE, a.isSale());
+        values.put(MATIERE, a.getMatiere().name());
+        values.put(SALE_PROPRE, a.isSale());
         values.put(TYPE, a.getTypeA().name());
         values.put(COUPE,a.getCoupeA().name());
         values.put(IMAGE, a.getImage());
@@ -73,7 +54,6 @@ public class AutreDAO extends VetementDAO {
         // Certtains attributs sont calculés automatiquement, il faut donc les attribuer à l'objet après la requête
         a.setNiveau(this.getNiveau(a));
         a.setCouche(this.getCouche(a));
-        a.setSale(this.getSalePropre(a));
         a.setSignes(this.getSignes(a));
     }
 

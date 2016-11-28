@@ -35,32 +35,12 @@ public class HautDAO extends VetementDAO {
         super(pContext);
     }
 
-    public static String createTable(){
-        return "CREATE TABLE " + TABLE_NAME  + "("
-                + KEY + " PRIMARY KEY AUTOINCREMENT,"
-                + DRESSING + " INTEGER REFERENCES DRESSING(idDressing) ON DELETE CASCADE,"
-                + COULEUR + " INTEGER NOT NULL,"
-                + MATIERE + " VARCHAR(30) REFERENCES MATIERE_SAISON(matiere) ON DELETE CASCADE CHECK ("+ MATIERE +" IN ('Laine','Coton','Jean','Lin','Velours','Cuir','Dentelle','Daim', 'Satin','Paillete')),"
-                + COUCHE + " INTEGER NOT NULL CHECK (couche>0 AND couche<4),"
-                + NIVEAU + " VARCHAR(20) NOT NULL CHECK (niveau IN ('Haut','Bas','Hautbas')),"
-                + SALE_PROPRE + " BOOLEAN NOT NULL,"
-                + IMAGE + " VARCHAR(200),"
-                + TYPE + " VARCHAR(20) NOT NULL CHECK ("+ TYPE +" IN ('Teeshirt','Chemisier','Pull','Veste','Manteau')),"
-                + COUPE + " VARCHAR(20) NOT NULL CHECK ("+ COUPE +" IN ('Cintre','Droit','Large'))"
-                + ");"
-                ;
-    }
-
-    public static String dropTable(){
-        return "DROP TABLE " + TABLE_NAME  + ";";
-    }
-
     public void insert(Haut h){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_NAME, new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") FROM " + TABLE_NAME+";", new String[]{});
         while(res.moveToNext()){
-            id = res.getInt(1)+1;
+            id = res.getInt(0)+1;
         }
         h.setIdObjet(id);
         res.close();
@@ -69,7 +49,8 @@ public class HautDAO extends VetementDAO {
         values.put(KEY, h.getIdObjet());
         values.put(DRESSING, h.getIdDressing());
         values.put(COULEUR, h.getCouleur().getCouleur());
-        values.put(MATIERE, h.isSale());
+        values.put(MATIERE, h.getMatiere().name());
+        values.put(SALE_PROPRE, h.isSale());
         values.put(TYPE, h.getTypeH().name());
         values.put(COUPE,h.getCoupeH().name());
         values.put(IMAGE, h.getImage());
@@ -79,7 +60,6 @@ public class HautDAO extends VetementDAO {
         // Certtains attributs sont calculés automatiquement, il faut donc les attribuer à l'objet après la requête
         h.setNiveau(this.getNiveau(h));
         h.setCouche(this.getCouche(h));
-        h.setSale(this.getSalePropre(h));
         h.setSignes(this.getSignes(h));
     }
 

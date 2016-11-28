@@ -23,12 +23,11 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String login, String mdp, int id, int age, int taille, Couleur couleurPreferee, CouleurCheveux couleurCheveux, Morphologie morphologie) {
+    public Utilisateur(String nom, String prenom, String login, String mdp,  int age, int taille, Couleur couleurPreferee, CouleurCheveux couleurCheveux, Morphologie morphologie) {
         this.nom = nom;
         this.prenom = prenom;
         this.login = login;
         this.mdp = mdp;
-        this.id = id;
         this.age = age;
         this.taille = taille;
         this.couleurPreferee = couleurPreferee;

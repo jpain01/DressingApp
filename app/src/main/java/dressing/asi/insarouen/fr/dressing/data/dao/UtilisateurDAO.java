@@ -30,31 +30,12 @@ public class UtilisateurDAO extends DAOBase {
         super(pContext);
     }
 
-    public static String createTable(){
-        return "CREATE TABLE " + TABLE_NAME  + "("
-                + KEY + " SERIAL PRIMARY KEY AUTOINCREMENT ,"
-                + NOM + " VARCHAR(20) NOT NULL,"
-                + PRENOM + " VARCHAR(20) NOT NULL,"
-                + AGE + " INTEGER NOT NULL,"
-                + TAILLE + " INTEGER NOT NULL,"
-                + LOGIN + " VARCHAR(20) NOT NULL,"
-                + PASSWORD + " VARCHAR(20) NOT NULL,"
-                + COULEUR_CHEVEUX + " VARCHAR(20) NOT NULL CHECK ("+ COULEUR_CHEVEUX +" IN ('Blond','Brun','Roux','Chatain')),"
-                + COULEUR_PREFEREE + " INTEGER NOT NULL,"
-                + MORPHOLOGIE + " VARCHAR(5) NOT NULL REFERENCES FORME(signe) ON DELETE CASCADE );"
-                ;
-    }
-
-    public static String dropTable(){
-        return "DROP TABLE " + TABLE_NAME  + ";";
-    }
-
     public void insert(Utilisateur u){
         int id = 1;
         SQLiteDatabase mDb = open();
         Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM "+ TABLE_NAME , new String[]{});
         while(res.moveToNext()){
-            id = res.getInt(1)+1;
+            id = res.getInt(0)+1;
         }
         u.setId(id);
         res.close();

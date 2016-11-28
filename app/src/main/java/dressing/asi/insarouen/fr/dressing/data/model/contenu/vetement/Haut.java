@@ -19,8 +19,8 @@ public class Haut extends Vetement {
     public Haut() {
     }
 
-    public Haut(Couleur couleur, String image, int idObjet, int idDressing, Matiere matiere, int couche, Niveau niveau, boolean sale, Morphologie[] signes, TypeHaut typeH, CoupeHaut coupeH) {
-        super(couleur, image, idObjet, idDressing, matiere, couche, niveau, sale, signes);
+    public Haut(Couleur couleur, String image,  int idDressing, Matiere matiere,  boolean sale, TypeHaut typeH, CoupeHaut coupeH) {
+        super(couleur, image,  idDressing, matiere,  sale);
         this.typeH = typeH;
         this.coupeH = coupeH;
     }

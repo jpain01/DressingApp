@@ -25,27 +25,13 @@ public class ChaussuresDAO extends ContenuDAO {
         super(pContext);
     }
 
-    public static String createTable(){
-        return "CREATE TABLE " + TABLE_NAME  + "("
-                + KEY + " PRIMARY KEY AUTOINCREMENT,"
-                + DRESSING + " INTEGER REFERENCES DRESSING(idDressing) ON DELETE CASCADE,"
-                + COULEUR + "INTEGER NOT NULL,"
-                + TYPE + " VARCHAR(20) NOT NULL CHECK (\"+ TYPE +\" IN ('Escarpins','Ballerines','Baskets','Bottesplates','Bottesatalons','Sandales')),"
-                + IMAGE + " VARCHAR(200) "
-                + ");"
-                ;
-    }
-
-    public static String dropTable(){
-        return "DROP TABLE " + TABLE_NAME  + ";";
-    }
 
     public void insert(Chaussures c){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM " + TABLE_NAME , new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ")  FROM " + TABLE_NAME +";", new String[]{});
         while(res.moveToNext()){
-            id = res.getInt(1)+1;
+            id = res.getInt(0)+1;
         }
         c.setIdObjet(id);
         res.close();

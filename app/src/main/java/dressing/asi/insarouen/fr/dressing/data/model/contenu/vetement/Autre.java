@@ -19,8 +19,8 @@ public class Autre extends Vetement {
     public Autre() {
     }
 
-    public Autre(Couleur couleur, String image, int idObjet, int idDressing, Matiere matiere, int couche, Niveau niveau, boolean sale, Morphologie[] signes, TypeAutre typeA, CoupeAutre coupeA) {
-        super(couleur, image, idObjet, idDressing, matiere, couche, niveau, sale, signes);
+    public Autre(Couleur couleur, String image, int idDressing, Matiere matiere, boolean sale,  TypeAutre typeA, CoupeAutre coupeA) {
+        super(couleur, image, idDressing, matiere,  sale);
         this.typeA = typeA;
         this.coupeA = coupeA;
     }

@@ -10,11 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DAOBase {
 
-    protected SQLiteDatabase mDb = null;
-    protected DBHelper mHelper = null;
+    protected SQLiteDatabase mDb ;
+    protected DBHelper mHelper ;
 
     public DAOBase(Context pContext){
-        this.mHelper = new DBHelper(pContext);
+        this.mHelper = mHelper.getInstance(pContext);
     }
 
     public SQLiteDatabase open() {

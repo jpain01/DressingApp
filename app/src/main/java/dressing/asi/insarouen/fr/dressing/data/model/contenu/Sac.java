@@ -11,11 +11,9 @@ import dressing.asi.insarouen.fr.dressing.elements.sac.TypeSac;
 public class Sac extends Contenu {
     private TypeSac typeS;
 
-    public Sac() {
-    }
 
-    public Sac(Couleur couleur, String image, int idObjet, int idDressing, TypeSac typeS) {
-        super(couleur, image, idObjet, idDressing);
+    public Sac(Couleur couleur, String image,  int idDressing, TypeSac typeS) {
+        super(couleur, image,  idDressing);
         this.typeS = typeS;
     }
 

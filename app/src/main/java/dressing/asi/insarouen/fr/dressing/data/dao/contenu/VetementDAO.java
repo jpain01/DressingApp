@@ -3,6 +3,7 @@ package dressing.asi.insarouen.fr.dressing.data.dao.contenu;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,11 @@ public class VetementDAO extends ContenuDAO {
         Niveau niveau = null;
         SQLiteDatabase mDb = open();
         Cursor res = mDb.rawQuery("select " + NIVEAU + " from " + this.getTableName(v) + " where " + KEY + " = ?", new String[]{String.valueOf(v.getIdObjet())});
-        mDb.close();
         while(res.moveToNext()){
-            niveau = Niveau.get(res.getString(1));
+            niveau = Niveau.get(res.getString(0));
         }
         res.close();
+        mDb.close();
         return niveau;
     }
 
@@ -54,11 +55,11 @@ public class VetementDAO extends ContenuDAO {
         int couche = 0;
         SQLiteDatabase mDb = open();
         Cursor res = mDb.rawQuery("select " + COUCHE + " from " + this.getTableName(v) + " where " + KEY + " = ?", new String[]{String.valueOf(v.getIdObjet())});
-        mDb.close();
         while(res.moveToNext()){
-            couche = res.getInt(1);
+            couche = res.getInt(0);
         }
         res.close();
+        mDb.close();
         return couche;
     }
 
@@ -66,25 +67,25 @@ public class VetementDAO extends ContenuDAO {
         boolean sale_propre = false;
         SQLiteDatabase mDb = open();
         Cursor res = mDb.rawQuery("select " + SALE_PROPRE + " from " + this.getTableName(v) + " where " + KEY + " = ?", new String[]{String.valueOf(v.getIdObjet())});
-        mDb.close();
         while(res.moveToNext()){
-            sale_propre = res.getInt(1) > 0;
+            sale_propre = res.getInt(0) > 0;
         }
         res.close();
+        mDb.close();
         return sale_propre;
     }
 
     public Morphologie[] getSignes(Vetement v) {
         Morphologie[] resultat;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select signe from " + this.getTableName(v) + "v, CORRESPOND c where v.idobjet=c.idobjet and v.idobjet= ?", new String[]{String.valueOf(v.getIdObjet())});
-        mDb.close();
+        Cursor res = mDb.rawQuery("select signe from " + this.getTableName(v) + " p, CORRESPOND_"+this.getTableName(v)+" c where p.idobjet=c.idobjet and p.idobjet= ?", new String[]{String.valueOf(v.getIdObjet())});
         List rowValues = new ArrayList();
         while (res.moveToNext()) {
-            rowValues.add(Morphologie.get(res.getString(1)));
+            rowValues.add(Morphologie.get(res.getString(0)));
         }
         resultat = (Morphologie[]) rowValues.toArray(new Morphologie[rowValues.size()]);
         res.close();
+        mDb.close();
         return resultat;
     }
 }
