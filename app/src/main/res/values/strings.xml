@@ -1,3 +1,23 @@
 <resources>
+    <!--Application-->
     <string name="app_name">Dressing</string>
+    <!-- Boutons-->
+    <string name="validation">Valider</string>
+    <!-- Test -->
+    <string name="btnClick">Click me !</string>
+    <!-- Connexion -->
+    <string name="hintId">Identifiant</string>
+    <string name="hintPswd">Mot de passe</string>
+    <string name="btnConnect">Connexion</string>
+    <string name="btnCreateAccount">Créer un compte</string>
+    <!-- Creation compte -->
+    <string name="userName">Prénom</string>
+    <string name="userSurname">Nom</string>
+    <string name="userAge">Age</string>
+    <string name="userHeight">Taille (cm)</string>
+    <string name="userHairColor">Couleur de cheveux</string>
+    <string name="userPreferedColor">Couleur préférée</string>
+    <string name="userMorphology">Morphologie</string>
+    <string name="confirmPswd">Confirmer le mot de passe</string>
+
 </resources>

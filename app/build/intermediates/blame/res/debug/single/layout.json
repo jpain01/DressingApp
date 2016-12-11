@@ -4,6 +4,10 @@
         "source": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
+        "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/accueil.xml",
+        "source": "/home/julie/AndroidStudioProjects/Dressing/app/src/main/res/layout/accueil.xml"
+    },
+    {
         "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
         "source": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/select_dialog_singlechoice_material.xml"
     },
@@ -18,6 +22,14 @@
     {
         "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
         "source": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/creation_compte.xml",
+        "source": "/home/julie/AndroidStudioProjects/Dressing/app/src/main/res/layout/creation_compte.xml"
+    },
+    {
+        "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/connexion.xml",
+        "source": "/home/julie/AndroidStudioProjects/Dressing/app/src/main/res/layout/connexion.xml"
     },
     {
         "merged": "/home/julie/AndroidStudioProjects/Dressing/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",

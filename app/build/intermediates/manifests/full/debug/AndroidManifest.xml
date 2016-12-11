@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/imagegarde"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
@@ -23,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="dressing.asi.insarouen.fr.dressing.activity.utilisateur.ConnexionActivity"
+            android:label="Connexion" />
+        <activity
+            android:name="dressing.asi.insarouen.fr.dressing.activity.utilisateur.CreationActivity"
+            android:label="Création compte utilisateur" />
+        <activity
+            android:name="dressing.asi.insarouen.fr.dressing.activity.accueil.AccueilActivity"
+            android:label="Accueil" />
     </application>
 
 </manifest>

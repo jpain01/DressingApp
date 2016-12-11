@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/labelPrenomUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userName"/>
+
+        <EditText
+            android:id="@+id/prenomUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/labelNomUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userSurname"/>
+
+        <EditText
+            android:id="@+id/nomUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/labelAgeUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userAge"/>
+
+        <Spinner
+            android:id="@+id/ageUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arrayAgeUser"/>
+
+        <TextView
+            android:id="@+id/labelTailleUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userHeight"/>
+
+        <Spinner
+            android:id="@+id/tailleUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arrayHeightUser"/>
+
+        <TextView
+            android:id="@+id/labelCouleurCheveuxUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userHairColor"/>
+
+        <Spinner
+            android:id="@+id/couleurCheveuxUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arrayHairColor"/>
+
+        <TextView
+            android:id="@+id/labelCouleurPrefereeUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userPreferedColor"/>
+
+        <Spinner
+            android:id="@+id/couleurPrefereeUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arrayPreferedColor"/>
+
+        <TextView
+            android:id="@+id/labelMorphologieUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userMorphology"/>
+
+        <Spinner
+            android:id="@+id/morphologieUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arrayMorphology"/>
+
+        <TextView
+            android:id="@+id/labelIdUtilisateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hintId"/>
+
+        <EditText
+            android:id="@+id/idUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/labelPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hintPswd"/>
+
+        <EditText
+            android:id="@+id/mdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/labelConfirmerPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirmPswd"/>
+
+        <EditText
+            android:id="@+id/confirmerMdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/validerCreationCompte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/validation" />
+    </LinearLayout>
+
+</ScrollView>

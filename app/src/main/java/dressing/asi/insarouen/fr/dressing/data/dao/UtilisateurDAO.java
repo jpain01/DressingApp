@@ -33,12 +33,11 @@ public class UtilisateurDAO extends DAOBase {
     public void insert(Utilisateur u){
         int id = 1;
         SQLiteDatabase mDb = open();
-        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") from MAX(idObjet) FROM "+ TABLE_NAME , new String[]{});
+        Cursor res = mDb.rawQuery("select MAX(" + KEY + ") FROM "+ TABLE_NAME , new String[]{});
         while(res.moveToNext()){
             id = res.getInt(0)+1;
         }
         u.setId(id);
-        res.close();
 
         ContentValues values = new ContentValues();
         values.put(KEY, u.getId());
@@ -53,6 +52,30 @@ public class UtilisateurDAO extends DAOBase {
         values.put(MORPHOLOGIE, u.getMorphologie().name());
         mDb.insert(TABLE_NAME,null,values);
         mDb.close();
+    }
+
+    public boolean identifiantDejaPresent(String identifiant){
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM "+ TABLE_NAME+" where "+ LOGIN +"='"+ identifiant +"';" , new String[]{});
+        if (res.moveToFirst()) {
+            res.close();
+            mDb.close();
+            return true;
+        } else {
+            res.close();
+            mDb.close();
+            return false;
+        }
+    }
+
+    public int isCorrectUser(String pswd, String id){
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select "+ KEY +" FROM "+ TABLE_NAME+" where "+ LOGIN +"='"+ id +"' and "+ PASSWORD +"='"+ pswd +"';" , new String[]{});
+        if (res.moveToFirst()) {
+            return res.getInt(0);
+        } else {
+            return 0;
+        }
     }
 
     public void delete(long id) {
