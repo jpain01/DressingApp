@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/accueilMenu"
+        android:icon="@drawable/cintre"
+        app:showAsAction="always"
+        android:title="@string/accueil"/>
+    <item android:id="@+id/dressingMenu"
+        android:icon="@drawable/cintre"
+        android:title="@string/app_name" />
+    <item android:id="@+id/tenueMenu"
+        android:icon="@drawable/cintre"
+        android:title="@string/tenue" />
+    <item android:id="@+id/corbeillegMenu"
+        android:icon="@drawable/cintre"
+        android:title="@string/corbeille" />
+</menu>

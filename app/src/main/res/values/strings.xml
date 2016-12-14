@@ -1,6 +1,10 @@
 <resources>
     <!--Application-->
     <string name="app_name">Dressing</string>
+    <string name="accueil">Accueil</string>
+    <string name="tenue">Tenue</string>
+    <string name="corbeille">Corbeille à linge</string>
+    <string name="notice">Notice d\'utilisation</string>
     <!-- Boutons-->
     <string name="validation">Valider</string>
     <!-- Test -->

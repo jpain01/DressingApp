@@ -216,4 +216,18 @@
         <item>A</item>
         <item>X</item>
     </string-array>
+
+    <string-array name="strArrDrawerList">
+        <item>Accueil</item>
+        <item>Dressing</item>
+        <item>Linge sale</item>
+        <item>Tenue</item>
+    </string-array>
+
+    <array name="arrDrawerListIcon">
+        <item>@drawable/ic_game</item>
+        <item>@drawable/ic_game</item>
+        <item>@drawable/ic_game</item>
+        <item>@drawable/ic_game</item>
+    </array>
 </resources>

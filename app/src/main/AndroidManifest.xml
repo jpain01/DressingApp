@@ -6,19 +6,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/imagegarde"
+        android:icon="@drawable/new_image_garde"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.utilisateur.ConnexionActivity"
+            android:label="Dressing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.utilisateur.ConnexionActivity"
-            android:label="Connexion"/>
         <activity android:name=".activity.utilisateur.CreationActivity"
             android:label="Création compte utilisateur"/>
         <activity android:name=".activity.accueil.AccueilActivity"
