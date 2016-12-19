@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import dressing.asi.insarouen.fr.dressing.data.DAOBase;
 import dressing.asi.insarouen.fr.dressing.data.model.Utilisateur;
+import dressing.asi.insarouen.fr.dressing.elements.Couleur;
+import dressing.asi.insarouen.fr.dressing.elements.utilisateur.CouleurCheveux;
+import dressing.asi.insarouen.fr.dressing.elements.utilisateur.Morphologie;
 
 
 /**
@@ -75,6 +78,16 @@ public class UtilisateurDAO extends DAOBase {
             return res.getInt(0);
         } else {
             return 0;
+        }
+    }
+
+    public Utilisateur findUserById(int id){
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * from "+ TABLE_NAME+" where "+ KEY +"="+ id +";", new String[]{});
+        if (res.moveToFirst()) {
+            return new Utilisateur(id, res.getString(res.getColumnIndex(NOM)),res.getString(res.getColumnIndex(PRENOM)), res.getString(res.getColumnIndex(LOGIN)), res.getString(res.getColumnIndex(PASSWORD)), res.getInt(res.getColumnIndex(AGE)), res.getInt(res.getColumnIndex(TAILLE)), new Couleur(res.getInt(res.getColumnIndex(COULEUR_PREFEREE))), CouleurCheveux.get(res.getString(res.getColumnIndex(COULEUR_CHEVEUX))), Morphologie.get(res.getString(res.getColumnIndex(MORPHOLOGIE))));
+        } else {
+            return null;
         }
     }
 

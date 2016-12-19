@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!-- my colors -->
+    <color name="colorFushia">#990033</color>
+    <color name="colorGrey">#CCCCCC</color>
+    <color name="colorGreyDark">#484848</color>
+    <color name="colorGreyBlue">#CCCCFF</color>
+    <color name="colorPink">#FF99FF</color>
+    <color name="colorYellow">#FFFFCC</color>
+    <!-- my transparent colors -->
+    <color name="colorGreyBlueTransparent">#DDCCCCFF</color>
+    <color name="colorWhiteTransparent">#CCFFFFFF</color>
 </resources>

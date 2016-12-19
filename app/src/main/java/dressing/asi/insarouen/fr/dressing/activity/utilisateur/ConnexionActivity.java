@@ -19,6 +19,7 @@ import static android.os.Build.ID;
  */
 
 public class ConnexionActivity extends AppCompatActivity {
+    public final static String ID = "ID";
     private Button connexionB = null ;
     private Button creationCompteB = null ;
 
@@ -50,8 +51,8 @@ public class ConnexionActivity extends AppCompatActivity {
                     u.open();
                     if (u.isCorrectUser(chainePswd, chaineId) != 0) {
                         // Redirection vers l'accueil
-                        Intent intent = new Intent(ConnexionActivity.this,AccueilActivity.class);
-                        intent.putExtra("ID",u.isCorrectUser(chainePswd, chaineId));
+                        Intent intent = new Intent(ConnexionActivity.this, AccueilActivity.class);
+                        intent.putExtra(ID, u.isCorrectUser(chainePswd, chaineId));
                         startActivity(intent);
                         id.setError(null);
                         psw.setError(null);

@@ -1,15 +1,19 @@
 package dressing.asi.insarouen.fr.dressing.activity.accueil;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +21,8 @@ import dressing.asi.insarouen.fr.dressing.R;
 import dressing.asi.insarouen.fr.dressing.activity.utilisateur.ConnexionActivity;
 import dressing.asi.insarouen.fr.dressing.drawer.DrawerAdapter;
 import dressing.asi.insarouen.fr.dressing.drawer.NavigationDrawer;
+import dressing.asi.insarouen.fr.dressing.fragment.AccueilFragment;
+import dressing.asi.insarouen.fr.dressing.fragment.dressing.AccueilDressingFragment;
 
 /**
  * Created by julie on 05/12/16.
@@ -26,14 +32,32 @@ public class AccueilActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrwDrawerToggle;
     private DrawerLayout mDrwDrawerLayout;
     private ListView mDrwDrawerList;
+    private int id;
+    private static final int MENU_ACCUEIL = 1;
+    private static final int MENU_DRESSING = 2;
+    private static final int MENU_CORBEILLE = 3;
+    private static final int MENU_TENUE = 4;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.accueil);
 
         // Déclaration
+        Toolbar toolbar = (Toolbar) findViewById(R.id.dressingToolbar);
         DrawerAdapter drwDrawerAdapter;
+        AccueilFragment fragment;
+        View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
+
+        // Recupération de l'indentifiant de l'utilisateur courant
+        Intent intent = getIntent();
+        id = intent.getIntExtra(ConnexionActivity.ID, 0);
+
+        // On instancie le fragment
+        fragment = AccueilFragment.newInstance(id);
+
+        // Coucou je veux que mon action bar soit celle-ci :)
+        setSupportActionBar(toolbar);
 
         // Creer un tableau de titres
         String[] drwMenuTitles = getResources().getStringArray(R.array.strArrDrawerList);
@@ -43,7 +67,7 @@ public class AccueilActivity extends AppCompatActivity {
         ArrayList<Object> drwDrawerItems = new ArrayList<>();
 
         // Remplie la liste d'objet avec les titres et les icones
-        for(int i = 0; i < drwMenuTitles.length; i++) {
+        for (int i = 0; i < drwMenuTitles.length; i++) {
             drwDrawerItems.add(new NavigationDrawer(drwMenuTitles[i], drwMenuIcons.getResourceId(i, -1)));
         }
         // Pour un typedArray, tjrs faire recycle()
@@ -54,22 +78,83 @@ public class AccueilActivity extends AppCompatActivity {
 
         // La magie ! Construit la liste drawer avec get view en faisant le for tout seul
         mDrwDrawerList = (ListView) findViewById(R.id.drwLvDrawerList);
-        if(mDrwDrawerList != null) {
+        if (mDrwDrawerList != null) {
+            mDrwDrawerList.addHeaderView(header);
             mDrwDrawerList.setAdapter(drwDrawerAdapter);
         }
 
         // Faire le joli bouton hamburger
-//        mDrwDrawerLayout = (DrawerLayout) findViewById(R.id.drwLyDrawerLayout);
-//        mDrwDrawerToggle = new ActionBarDrawerToggle(this, mDrwDrawerLayout, toolbar, R.string.strOpenDrawer , R.string.strCloseDrawer);
-//        mDrwDrawerLayout.addDrawerListener(mDrwDrawerToggle);
-//        mDrwDrawerToggle.syncState();
+        mDrwDrawerLayout = (DrawerLayout) findViewById(R.id.drwLyDrawerLayout);
+        mDrwDrawerToggle = new ActionBarDrawerToggle(this, mDrwDrawerLayout, toolbar, R.string.strOpenDrawer, R.string.strCloseDrawer);
+        mDrwDrawerLayout.addDrawerListener(mDrwDrawerToggle);
+        mDrwDrawerToggle.syncState();
+
+        // Definir un onItemClickListener sur la liste des items de mon drawer
+        mDrwDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // Mettre l'accueil par défaut
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_general, menu);
-        return true;
+    // Classe interne pour définir le onItemClickListener
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+
+        private void selectItem(int position) {
+            AccueilFragment fragment = null;
+            AccueilDressingFragment dressingFragment = null;
+
+            switch (position) {
+                case MENU_ACCUEIL:
+                    fragment = AccueilFragment.newInstance(id);
+                    break;
+                case MENU_DRESSING:
+                    dressingFragment = AccueilDressingFragment.newInstance(id);
+                    break;
+                case MENU_CORBEILLE:
+                    fragment = AccueilFragment.newInstance(id);
+                    break;
+                case MENU_TENUE:
+                    Toast.makeText(getApplicationContext(), "Medias", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+
+            // récupération du manager
+            FragmentManager fragmentManager = getFragmentManager();
+            // Commençons une transaction
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // Remplace notre vue par le fragment qu'on veut
+            if (fragment != null)
+                fragmentTransaction.replace(R.id.frame, fragment);
+
+            if (dressingFragment != null)
+                fragmentTransaction.replace(R.id.frame, dressingFragment);
+
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+            mDrwDrawerList.setItemChecked(position, true);
+            mDrwDrawerLayout.closeDrawer(mDrwDrawerList);
+        }
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_general, menu);
+//        return true;
+//    }
 
 }

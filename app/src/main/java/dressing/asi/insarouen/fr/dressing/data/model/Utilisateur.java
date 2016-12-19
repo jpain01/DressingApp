@@ -23,7 +23,8 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String login, String mdp,  int age, int taille, Couleur couleurPreferee, CouleurCheveux couleurCheveux, Morphologie morphologie) {
+    public Utilisateur(int id, String nom, String prenom, String login, String mdp,  int age, int taille, Couleur couleurPreferee, CouleurCheveux couleurCheveux, Morphologie morphologie) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.login = login;
@@ -113,5 +114,10 @@ public class Utilisateur {
 
     public void setCouleurCheveux(CouleurCheveux couleurCheveux) {
         this.couleurCheveux = couleurCheveux;
+    }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" + "nom=" + nom + ", prenom=" + prenom + ", id=" + id + ", age=" + age + ", taille=" + taille + ", couleurPreferee=" + couleurPreferee + ", couleurCheveux=" + couleurCheveux + ", signeUtilisateur=" + morphologie + '}';
     }
 }

@@ -6,7 +6,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="30sp"
+            android:textColor="@color/colorFushia"
+            android:layout_marginBottom="20dp"
+            android:text="@string/createAccount"/>
 
         <TextView
             android:id="@+id/labelPrenomUtilisateur"
@@ -30,65 +41,114 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <TextView
-            android:id="@+id/labelAgeUtilisateur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/userAge"/>
-
-        <Spinner
-            android:id="@+id/ageUtilisateur"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/arrayAgeUser"/>
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/labelTailleUtilisateur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/userHeight"/>
+            <TextView
+                android:id="@+id/labelAgeUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/userAge"/>
 
-        <Spinner
-            android:id="@+id/tailleUtilisateur"
+            <Spinner
+                android:id="@+id/ageUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:entries="@array/arrayAgeUser"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/arrayHeightUser"/>
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/labelCouleurCheveuxUtilisateur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/userHairColor"/>
+            <TextView
+                android:id="@+id/labelTailleUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/userHeight"/>
 
-        <Spinner
-            android:id="@+id/couleurCheveuxUtilisateur"
+            <Spinner
+                android:id="@+id/tailleUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:entries="@array/arrayHeightUser"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/arrayHairColor"/>
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/labelCouleurPrefereeUtilisateur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/userPreferedColor"/>
+            <TextView
+                android:id="@+id/labelCouleurCheveuxUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/userHairColor"/>
 
-        <Spinner
-            android:id="@+id/couleurPrefereeUtilisateur"
+            <Spinner
+                android:id="@+id/couleurCheveuxUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:entries="@array/arrayHairColor"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/arrayPreferedColor"/>
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/labelMorphologieUtilisateur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/userMorphology"/>
+            <TextView
+                android:id="@+id/labelCouleurPrefereeUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/userPreferedColor"/>
 
-        <Spinner
-            android:id="@+id/morphologieUtilisateur"
+            <Spinner
+                android:id="@+id/couleurPrefereeUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:entries="@array/arrayPreferedColor"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/arrayMorphology"/>
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/labelMorphologieUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/userMorphology"/>
+
+            <Spinner
+                android:id="@+id/morphologieUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:entries="@array/arrayMorphology"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/labelIdUtilisateur"
@@ -129,6 +189,12 @@
             android:id="@+id/validerCreationCompte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorFushia"
+            android:textColor="@android:color/white"
             android:text="@string/validation" />
     </LinearLayout>
 

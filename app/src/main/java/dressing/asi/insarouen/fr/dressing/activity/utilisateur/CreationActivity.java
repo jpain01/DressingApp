@@ -95,7 +95,7 @@ public class CreationActivity extends AppCompatActivity {
                             identifiantV.setError("Cet identifiant est déjà utilisé");
                         } else {
                             // Insertion de de l'utilisateur dans la base de données
-                            u.insert(new Utilisateur(nom,prenom, identifiant, mdp, age, taille, couleurPreferee, couleurCheveux, morphologie ));
+                            u.insert(new Utilisateur(0, nom, prenom, identifiant, mdp, age, taille, couleurPreferee, couleurCheveux, morphologie ));
 
                             // Redirection vers l'accueil
                             Intent intent = new Intent(CreationActivity.this,AccueilActivity.class);

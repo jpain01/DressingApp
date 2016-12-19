@@ -225,9 +225,81 @@
     </string-array>
 
     <array name="arrDrawerListIcon">
-        <item>@drawable/ic_game</item>
-        <item>@drawable/ic_game</item>
-        <item>@drawable/ic_game</item>
-        <item>@drawable/ic_game</item>
+        <item>@drawable/home_icone</item>
+        <item>@drawable/cintre_icone</item>
+        <item>@drawable/panier_icone</item>
+        <item>@drawable/clothes_icone</item>
     </array>
+
+    <string-array name="arrListDressing">
+        <item>Dressing Complet</item>
+        <item>Sacs</item>
+        <item>Chaussures</item>
+        <item>Tee-shirts</item>
+        <item>Combinaison</item>
+        <item>Vestes</item>
+        <item>Pantalons</item>
+        <item>Pulls</item>
+        <item>Robes</item>
+        <item>Shorts</item>
+        <item>Joggings</item>
+        <item>Manteaux</item>
+        <item>Pantacourt</item>
+        <item>Chemisiers</item>
+        <item>Jupes</item>
+    </string-array>
+
+    <string-array name="arrIconDressing">
+        <item>cintre</item>
+        <item>bag</item>
+        <item>shoes</item>
+        <item>shirt</item>
+        <item>combinaison</item>
+        <item>jacket</item>
+        <item>pants</item>
+        <item>pullover</item>
+        <item>dress</item>
+        <item>shorts</item>
+        <item>jogging</item>
+        <item>coat</item>
+        <item>pantacourt</item>
+        <item>blouse</item>
+        <item>skirt</item>
+    </string-array>
+
+    <string-array name="arrayAdviceHuit">
+        <item>Préférez les hauts larges</item>
+        <item>Préférez les pantalons coupe droite</item>
+    </string-array>
+
+    <string-array name="arrayAdviceV">
+        <item>Privilégiez les robes ressérées à la taille</item>
+        <item>Évitez de porter des hauts bustier</item>
+        <item>Évitez de porter des épaulettes</item>
+    </string-array>
+
+    <string-array name="arrayAdviceA">
+        <item>Préférez les pantalons coupe droite</item>
+        <item>Portez des colliers ras du cou pour attirer l\'attention sur votre buste</item>
+        <item>Portez des robes fendues pour amincir vos jambes</item>
+        <item>Trichez avec des compensées afin d\'affiner vos jambes</item>
+        <item>Portez des hauts amples pour attirer le regard sur votre buste</item>
+    </string-array>
+
+    <string-array name="arrayAdviceO">
+        <item>Préférez les hauts amples</item>
+        <item>Évitez de porter des rayures horizontales</item>
+        <item>Évitez de porter des pantalons taille basse</item>
+    </string-array>
+
+    <string-array name="arrayAdviceH">
+        <item>Portez des robes droites afin d\'embellir votre silhouette</item>
+        <item>Évitez les pièces taille haute qui soulignent  les parties moins avantageuse de votre allure</item>
+    </string-array>
+
+    <string-array name="arrayAdviceX">
+        <item>Évitez les pulls cols roulés moulants</item>
+        <item>Osez la couleurs et les decolletés !</item>
+        <item>N\'hésitez pas à souligner votre taille avec une ceinture</item>
+    </string-array>
 </resources>

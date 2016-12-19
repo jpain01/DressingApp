@@ -5,6 +5,9 @@
     <string name="tenue">Tenue</string>
     <string name="corbeille">Corbeille à linge</string>
     <string name="notice">Notice d\'utilisation</string>
+    <!-- Drawer -->
+    <string name="strOpenDrawer">Open Drawer</string>
+    <string name="strCloseDrawer">Close Drawer</string>
     <!-- Boutons-->
     <string name="validation">Valider</string>
     <!-- Test -->
@@ -15,6 +18,7 @@
     <string name="btnConnect">Connexion</string>
     <string name="btnCreateAccount">Créer un compte</string>
     <!-- Creation compte -->
+    <string name="createAccount">Création de compte</string>
     <string name="userName">Prénom</string>
     <string name="userSurname">Nom</string>
     <string name="userAge">Age</string>
@@ -23,5 +27,26 @@
     <string name="userPreferedColor">Couleur préférée</string>
     <string name="userMorphology">Morphologie</string>
     <string name="confirmPswd">Confirmer le mot de passe</string>
+    <!-- Conseils -->
+    <string name="conseil_Huit_0">Préférez les hauts larges</string>
+    <string name="conseil_Huit_1">Préférez les pantalons coupe droite</string>
+    <string name="conseil_V_0">Privilégiez les robes ressérées à la taille</string>
+    <string name="conseil_V_1">Évitez de porter des hauts bustier</string>
+    <string name="conseil_V_2">Évitez de porter des épaulettes</string>
+    <string name="conseil_A_0">Préférez les pantalons coupe droite</string>
+    <string name="conseil_A_1">Portez des colliers ras du cou pour attirer l\'attention sur votre buste</string>
+    <string name="conseil_A_2">Portez des robes fendues pour amincir vos jambes</string>
+    <string name="conseil_A_3">Trichez avec des compensées afin d\'affiner vos jambes</string>
+    <string name="conseil_A_4">Portez des hauts amples pour attirer le regard sur votre buste</string>
+    <string name="conseil_O_0">Préférez les hauts amples</string>
+    <string name="conseil_O_1">Évitez de porter des rayures horizontales</string>
+    <string name="conseil_O_2">Évitez de porter des pantalons taille basse</string>
+    <string name="conseil_H_0">Portez des robes droites afin d\'embellir votre silhouette</string>
+    <string name="conseil_H_1">Évitez les pièces taille haute qui soulignent  les parties moins avantageuse de votre allure</string>
+    <string name="conseil_X_0">Évitez les pulls cols roulés moulants</string>
+    <string name="conseil_X_1">Osez la couleurs et les decolletés !</string>
+    <string name="conseil_X_2">N\'hésitez pas à souligner votre taille avec une ceinture</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
