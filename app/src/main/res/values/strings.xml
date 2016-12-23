@@ -5,6 +5,7 @@
     <string name="tenue">Tenue</string>
     <string name="corbeille">Corbeille à linge</string>
     <string name="notice">Notice d\'utilisation</string>
+    <string name="deconnexion">Déconnexion</string>
     <!-- Drawer -->
     <string name="strOpenDrawer">Open Drawer</string>
     <string name="strCloseDrawer">Close Drawer</string>
@@ -46,6 +47,68 @@
     <string name="conseil_X_0">Évitez les pulls cols roulés moulants</string>
     <string name="conseil_X_1">Osez la couleurs et les decolletés !</string>
     <string name="conseil_X_2">N\'hésitez pas à souligner votre taille avec une ceinture</string>
+    <!-- Notice d'utilisation -->
+    <string name="notice_text"><![CDATA[ "<h2> Notice d'utilisation </h2>
+    <b> Accueil </b>
+    <br>
+    <br>
+    Sur la page d'accueil, vous trouverez les informations vous concernant ainsi
+    que des conseils en fonction de votre morphologie.
 
+    <br><br>
 
+<b>Afficher son dressing : </b>
+<br>
+<br>
+    Pour accéder à votre dressing, vous pouvez cliquer sur le bouton
+    représentant un cintre ou par le menu gauche en cliquant sur \"Dressing\".
+    Une liste apparaît représentant chaque type de vêtement, sac ou chaussures présents dans votre dressing.
+    En cliquant sur un des éléments, une seconde liste apparaît avec la photos des éléments correspondants.
+<br>
+<br>
+<b>Afficher les caractéristiques d'un élément :</b>
+    <br>
+    <br>
+    Appuyez sur la photo d'un élément pour afficher
+    toutes les caractéristiques de l'élément.
+    <br>
+    <br>
+<b>Ajouter un élément :</b>
+    <br>
+    <br>
+    Appuyez sur le bouton situé en bas à droite lorsque vous consultez votre dressing.
+    Un menu s'ouvre et vous demande quel type d'élément vous voulez ajouter.
+    Il vous suffit ensuite de remplir le formulaire d'ajout d'un élément.
+    <br>
+    <br>
+<b>Supprimer un élément :</b>
+    <br>
+    <br>
+    Pour supprimer un élément de votre dressing, appuyez longument sur la photo d'un vêtement,
+    la bar de navigation située en haut change et vous pouvez appuyer sur la corbeille.
+    Cliquez sur le moins situé en haut de la fenêtre d'affichage.
+    Vous pouvez également afficher les éléments d'un type et appuyer
+    sur la corbeille d'un élément pour supprimer cet élément particulier.
+    <br>
+    <br>
+<b>Mettre un vêtement au sale :</b>
+    <br>
+    <br>
+    Lorsque vous consultez un vêtement, il est possible de le mettre au sale en appuyant sur la corbeille à linge.
+    Vous pouvez également cliquer directement sur le bouton corbeille à linge depuis
+    le menu principal. Vous pouvez ainsi consulter vos vêtements sales et sortir
+    ou ajouter des vêtements à la corbeille.
+    <br>
+    <br>
+<b>Créer une tenue :</b>
+    <br>
+    <br>
+    Cliquez sur le bouton créer une tenue. Il vous suffit ensuite
+    de sélectionner les différents critères avec lesquels vous voulez
+    créer votre tenue puis de cliquer sur valider. La tenue créée s'affiche."
+     ]]></string>
+    <!-- Ajout contenu -->
+    <string name="sac">Sac</string>
+    <string name="chaussures">Chaussures</string>
+    <string name="vetement">Vêtement</string>
 </resources>

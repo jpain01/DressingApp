@@ -24,6 +24,8 @@
             android:label="Création compte utilisateur"/>
         <activity android:name=".activity.accueil.AccueilActivity"
             android:label="Accueil"/>
+        <activity android:name=".activity.notice.NoticeActivity"
+            android:label="Notice d'utilisation"/>
     </application>
 
 </manifest>

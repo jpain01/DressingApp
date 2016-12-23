@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_ajout">
+        <item android:id="@+id/sac"
+            android:title="@string/sac" />
+        <item android:id="@+id/chaussures"
+            android:title="@string/chaussures" />
+        <item android:id="@+id/vetement"
+            android:title="@string/vetement" />
+</menu>

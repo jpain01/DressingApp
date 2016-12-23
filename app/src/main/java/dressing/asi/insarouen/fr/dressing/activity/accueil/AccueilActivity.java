@@ -2,11 +2,13 @@ package dressing.asi.insarouen.fr.dressing.activity.accueil;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.activity.notice.NoticeActivity;
 import dressing.asi.insarouen.fr.dressing.activity.utilisateur.ConnexionActivity;
 import dressing.asi.insarouen.fr.dressing.drawer.DrawerAdapter;
 import dressing.asi.insarouen.fr.dressing.drawer.NavigationDrawer;
@@ -61,6 +64,7 @@ public class AccueilActivity extends AppCompatActivity {
 
         // Coucou je veux que mon action bar soit celle-ci :)
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.accueil);
 
         // Creer un tableau de titres
         String[] drwMenuTitles = getResources().getStringArray(R.array.strArrDrawerList);
@@ -131,6 +135,7 @@ public class AccueilActivity extends AppCompatActivity {
                             //Pour avoir le burger
                             if(getSupportActionBar() != null)
                                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                                getSupportActionBar().setTitle(R.string.accueil);
                             mDrwDrawerToggle.syncState();
                             if(toolbar != null)
                                 toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -186,7 +191,7 @@ public class AccueilActivity extends AppCompatActivity {
             if (dressingFragment != null)
                 fragmentTransaction.replace(R.id.frame, dressingFragment);
 
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.addToBackStack(Integer.toString(position));
             fragmentTransaction.commit();
 
             mDrwDrawerList.setItemChecked(position, true);
@@ -205,14 +210,28 @@ public class AccueilActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.deconnexion:
-//                Intent settingsIntent = new Intent(HomeActivity.this, SettingsActivity.class);
-//                startActivity(settingsIntent);
-//                overridePendingTransition(R.anim.slide_up, R.anim.stay); //Animation transition slide down
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent disconectIntent = new Intent(AccueilActivity.this, ConnexionActivity.class);
+                                startActivity(disconectIntent);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Êtes vous sûr(e) de vouloir quitter ?").setPositiveButton("Oui", dialogClickListener).setNegativeButton("Non", dialogClickListener).show();
+
                 return true;
             case R.id.notice:
-//                Intent helpIntent = new Intent(HomeActivity.this, HelpActivity.class);
-//                startActivity(helpIntent);
-//                overridePendingTransition(R.anim.slide_up, R.anim.stay); //Animation transition slide down
+                Intent settingsIntent = new Intent(AccueilActivity.this, NoticeActivity.class);
+                startActivity(settingsIntent);
+                overridePendingTransition(R.anim.slide_up, R.anim.stay); //Animation transition slide down
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

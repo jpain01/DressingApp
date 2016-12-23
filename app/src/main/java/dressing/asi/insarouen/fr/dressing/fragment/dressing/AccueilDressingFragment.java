@@ -1,15 +1,25 @@
 package dressing.asi.insarouen.fr.dressing.fragment.dressing;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -71,6 +81,40 @@ public class AccueilDressingFragment extends Fragment {
         // Création de l'adapter
         DressingItemAdapter dressingItemAdapter = new DressingItemAdapter(items, getActivity());
         mRecyclerView.setAdapter(dressingItemAdapter);
+
+        // Action d'un bouton d'ajout
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.ajouterContenu);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getActivity(), v);
+                getActivity().getMenuInflater().inflate(R.menu.menu_ajout_contenu, popup.getMenu());
+                popup.show();
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.sac:
+                                Toast toast = Toast.makeText(getActivity(), "Sac", Toast.LENGTH_SHORT);
+                                toast.show();
+                                return true;
+                            case R.id.chaussures:
+                                Toast toast1 = Toast.makeText(getActivity(), "Chaussures", Toast.LENGTH_SHORT);
+                                toast1.show();
+                                return true;
+                            case R.id.vetement:
+                                Toast toast2 = Toast.makeText(getActivity(), "Vetement", Toast.LENGTH_SHORT);
+                                toast2.show();
+                                return true;
+                            default:
+                                return true;
+                        }
+                    }
+                });
+
+            }
+        });
 
         return view;
     }

@@ -10,6 +10,17 @@
         <item name="colorPrimary">@color/colorFushia</item>
         <item name="colorPrimaryDark">@android:color/background_dark</item>
         <item name="colorAccent">@color/colorFushia</item>
+        <item name="android:actionButtonStyle">@style/myActionButtonStyle</item>
+        <item name="actionButtonStyle">@style/myActionButtonStyle</item>
+    </style>
+
+    <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">30dp</item>
+        <item name="android:maxWidth">48dp</item>
+        <item name="android:width">42dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">38dp</item>
+        <item name="android:height">32dp</item>
     </style>
 
 </resources>
