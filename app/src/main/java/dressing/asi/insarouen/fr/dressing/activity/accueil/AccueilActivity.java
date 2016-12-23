@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -44,7 +47,7 @@ public class AccueilActivity extends AppCompatActivity {
         this.setContentView(R.layout.accueil);
 
         // Déclaration
-        Toolbar toolbar = (Toolbar) findViewById(R.id.dressingToolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.dressingToolbar);
         DrawerAdapter drwDrawerAdapter;
         AccueilFragment fragment;
         View header = getLayoutInflater().inflate(R.layout.drawer_header, null);
@@ -93,12 +96,53 @@ public class AccueilActivity extends AppCompatActivity {
         mDrwDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // Mettre l'accueil par défaut
+        FragmentManager fragmentManager = getFragmentManager();
         if (savedInstanceState == null) {
-            FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
+            mDrwDrawerList.setItemChecked(MENU_ACCUEIL, true);
         }
+
+        /*Listener sur le backstack pour mettre à jour l'item selectionner dans le drawer
+        Quand un fragment est ajouté au backstack et donc que le backstack change, on met à jour l'item*/
+        fragmentManager.addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        //Si y'a encore qqch dans le backstack sinon ça veut dire qu'on est revenu sur l'accueil
+                        if(getFragmentManager().getBackStackEntryCount() > 0) {
+                            String position = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+                            if(position != null)
+                                mDrwDrawerList.setItemChecked(Integer.parseInt(position), true);
+
+//                            //Pour avoir la fleche back
+//                            if(getSupportActionBar() != null)
+//                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//                            if(toolbar != null)
+//                                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        onBackPressed();
+//                                    }
+//                                });
+                        } else {
+                            mDrwDrawerList.setItemChecked(MENU_ACCUEIL, true);
+
+                            //Pour avoir le burger
+                            if(getSupportActionBar() != null)
+                                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            mDrwDrawerToggle.syncState();
+                            if(toolbar != null)
+                                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mDrwDrawerLayout.openDrawer(mDrwDrawerList);
+                                    }
+                                });
+                        }
+                    }
+                }
+        );
     }
 
     // Classe interne pour définir le onItemClickListener
@@ -150,11 +194,29 @@ public class AccueilActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_general, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_general, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.deconnexion:
+//                Intent settingsIntent = new Intent(HomeActivity.this, SettingsActivity.class);
+//                startActivity(settingsIntent);
+//                overridePendingTransition(R.anim.slide_up, R.anim.stay); //Animation transition slide down
+                return true;
+            case R.id.notice:
+//                Intent helpIntent = new Intent(HomeActivity.this, HelpActivity.class);
+//                startActivity(helpIntent);
+//                overridePendingTransition(R.anim.slide_up, R.anim.stay); //Animation transition slide down
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
 
 }
