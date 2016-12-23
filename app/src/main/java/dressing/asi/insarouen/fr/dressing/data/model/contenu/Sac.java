@@ -12,8 +12,8 @@ public class Sac extends Contenu {
     private TypeSac typeS;
 
 
-    public Sac(Couleur couleur, String image,  int idDressing, TypeSac typeS) {
-        super(couleur, image,  idDressing);
+    public Sac(Couleur couleur, String image,  int idDressing, int idObjet, TypeSac typeS) {
+        super(couleur, image,  idDressing, idObjet);
         this.typeS = typeS;
     }
 

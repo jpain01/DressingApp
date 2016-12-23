@@ -23,10 +23,12 @@ public class Vetement extends Contenu {
     public Vetement() {
     }
 
-    public Vetement(Couleur couleur, String image,  int idDressing, Matiere matiere, boolean sale) {
-        super(couleur, image, idDressing);
+    public Vetement(Couleur couleur, String image,  int idDressing, int idObjet, Matiere matiere, boolean sale, int couche, Niveau nveau) {
+        super(couleur, image, idDressing, idObjet);
         this.matiere = matiere;
         this.sale = sale;
+        this.couche = couche;
+        this.niveau = niveau;
     }
 
     public Matiere getMatiere() {

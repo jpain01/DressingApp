@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dressing.asi.insarouen.fr.dressing.data.dao.ContenuDAO;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.AutreDAO;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.HautDAO;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.PantalonDAO;
+import dressing.asi.insarouen.fr.dressing.data.model.Contenu;
+import dressing.asi.insarouen.fr.dressing.data.model.Utilisateur;
 import dressing.asi.insarouen.fr.dressing.data.model.contenu.Vetement;
 import dressing.asi.insarouen.fr.dressing.elements.utilisateur.Morphologie;
 import dressing.asi.insarouen.fr.dressing.elements.vetement.Niveau;
@@ -87,5 +92,27 @@ public class VetementDAO extends ContenuDAO {
         res.close();
         mDb.close();
         return resultat;
+    }
+
+    @Override
+    public ArrayList<Contenu> findAll(int idDressing, Context context) {
+        ArrayList<Contenu> resultList = new ArrayList<>();
+        // Récupération des pantalons
+        PantalonDAO p = new PantalonDAO(context);
+        p.open();
+        resultList.addAll(p.findAll(idDressing));
+        p.close();
+        // Récupération des Hauts
+        HautDAO h = new HautDAO(context);
+        h.open();
+        resultList.addAll(h.findAll(idDressing));
+        h.close();
+        // Récupération des Autres
+        AutreDAO a = new AutreDAO(context);
+        a.open();
+        resultList.addAll(a.findAll(idDressing));
+        a.close();
+
+        return resultList;
     }
 }

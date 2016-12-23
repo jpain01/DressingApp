@@ -67,6 +67,7 @@ public class AccueilFragment extends Fragment {
         UtilisateurDAO u = new UtilisateurDAO(getActivity());
         u.open();
         Utilisateur utilisateur = u.findUserById(userId);
+        u.close();
 
         // Remplissage des TextView avec les infos de l'utilisateur
         prenomV.setText(utilisateur.getPrenom());

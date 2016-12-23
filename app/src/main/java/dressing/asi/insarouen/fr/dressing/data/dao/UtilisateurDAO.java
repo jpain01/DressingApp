@@ -91,6 +91,16 @@ public class UtilisateurDAO extends DAOBase {
         }
     }
 
+    public int getIdDressing(int idUtilisateur) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select idDressing from dressing where idPers = "+idUtilisateur+";", new String[]{});
+        if (res.moveToFirst()) {
+            return res.getInt(0);
+        } else {
+            return 0;
+        }
+    }
+
     public void delete(long id) {
         SQLiteDatabase mDb = open();
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});

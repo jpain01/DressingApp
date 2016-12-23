@@ -233,20 +233,20 @@
 
     <string-array name="arrListDressing">
         <item>Dressing Complet</item>
-        <item>Sacs</item>
-        <item>Chaussures</item>
-        <item>Tee-shirts</item>
+        <item>Sac</item>
+        <item>Chaussure</item>
+        <item>Tee-shirt</item>
         <item>Combinaison</item>
-        <item>Vestes</item>
-        <item>Pantalons</item>
-        <item>Pulls</item>
-        <item>Robes</item>
-        <item>Shorts</item>
-        <item>Joggings</item>
-        <item>Manteaux</item>
+        <item>Veste</item>
+        <item>Pantalon</item>
+        <item>Pull</item>
+        <item>Robe</item>
+        <item>Short</item>
+        <item>Jogging</item>
+        <item>Manteau</item>
         <item>Pantacourt</item>
-        <item>Chemisiers</item>
-        <item>Jupes</item>
+        <item>Chemisier</item>
+        <item>Jupe</item>
     </string-array>
 
     <string-array name="arrIconDressing">

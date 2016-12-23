@@ -15,7 +15,8 @@ public class Contenu {
     public Contenu() {
     }
 
-    public Contenu(Couleur couleur, String image,  int idDressing) {
+    public Contenu(Couleur couleur, String image,  int idDressing, int idObjet) {
+        this.idObjet = idObjet;
         this.couleur = couleur;
         this.image = image;
         this.idDressing = idDressing;

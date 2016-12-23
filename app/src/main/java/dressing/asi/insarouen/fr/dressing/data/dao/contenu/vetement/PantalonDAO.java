@@ -4,9 +4,21 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.VetementDAO;
+import dressing.asi.insarouen.fr.dressing.data.model.Contenu;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Haut;
 import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Pantalon;
+import dressing.asi.insarouen.fr.dressing.elements.Couleur;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.Matiere;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.Niveau;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.haut.CoupeHaut;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.haut.TypeHaut;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.pantalon.CoupePantalon;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.pantalon.TypePantalon;
 
 /**
  * Created by julie on 22/10/16.
@@ -61,5 +73,34 @@ public class PantalonDAO extends VetementDAO {
         SQLiteDatabase mDb = open();
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
         mDb.close();
+    }
+
+    public ArrayList<Pantalon> findAll(int idDressing) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM " + TABLE_NAME +" WHERE idDressing = "+ idDressing +";", new String[]{});
+        ArrayList<Pantalon> pantalonList = new ArrayList<>();
+
+        for(res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
+            Pantalon p = new Pantalon(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), Matiere.get(res.getString(res.getColumnIndex(MATIERE))), (res.getInt(res.getColumnIndex(SALE_PROPRE)) ==1), TypePantalon.get(res.getString(res.getColumnIndex(TYPE))), CoupePantalon.get(res.getString(res.getColumnIndex(COUPE))), res.getInt(res.getColumnIndex(COUCHE)), Niveau.get(res.getString(res.getColumnIndex(NIVEAU))));
+            pantalonList.add(p);
+        }
+
+        res.close();
+        return pantalonList;
+    }
+
+    public ArrayList<Contenu> findByType(int idDressing, String typePantalon) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM " + TABLE_NAME +" WHERE idDressing = "+ idDressing +" AND "+ TYPE +"= '"+ typePantalon +"';", new String[]{});
+        ArrayList<Contenu> pantalonList = new ArrayList<>();
+
+        for(res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
+            Haut h = new Haut(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), Matiere.get(res.getString(res.getColumnIndex(MATIERE))), (res.getInt(res.getColumnIndex(SALE_PROPRE)) ==1), TypeHaut.get(res.getString(res.getColumnIndex(TYPE))), CoupeHaut.get(res.getString(res.getColumnIndex(COUPE))), res.getInt(res.getColumnIndex(COUCHE)), Niveau.get(res.getString(res.getColumnIndex(NIVEAU))));
+            Log.v("haut", h.toString());
+            pantalonList.add(h);
+        }
+
+        res.close();
+        return pantalonList;
     }
 }

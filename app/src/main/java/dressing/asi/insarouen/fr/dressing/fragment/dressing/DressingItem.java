@@ -7,10 +7,12 @@ package dressing.asi.insarouen.fr.dressing.fragment.dressing;
 public class DressingItem {
     private String mTitle;
     private String mIcon;
+    private int idUtilisateur;
 
-    public DressingItem(String title, String icon){
+    public DressingItem(String title, String icon, int idUtilisateur){
         this.mTitle = title;
         this.mIcon = icon;
+        this.idUtilisateur = idUtilisateur;
     }
 
     public String getTitle(){
@@ -27,5 +29,13 @@ public class DressingItem {
 
     public void setIcon(String icon){
         this.mIcon = icon;
+    }
+
+    public int getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
     }
 }

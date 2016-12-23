@@ -60,14 +60,12 @@ public class AccueilDressingFragment extends Fragment {
 
         for(int i = 0; i < arrListDressing.length; i++)
         {
-            items.add(new DressingItem(arrListDressing[i], arrListIcon[i]));
+            items.add(new DressingItem(arrListDressing[i], arrListIcon[i], userId));
         }
 
         // Création de l'adapter
         DressingItemAdapter dressingItemAdapter = new DressingItemAdapter(items, getActivity());
         mRecyclerView.setAdapter(dressingItemAdapter);
-
-
 
         return view;
     }

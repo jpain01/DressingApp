@@ -19,8 +19,8 @@ public class Pantalon extends Vetement {
     public Pantalon() {
     }
 
-    public Pantalon(Couleur couleur, String image,  int idDressing, Matiere matiere,  boolean sale, TypePantalon typeP, CoupePantalon coupeP) {
-        super(couleur, image, idDressing, matiere,  sale);
+    public Pantalon(Couleur couleur, String image,  int idDressing, int idObjet, Matiere matiere,  boolean sale, TypePantalon typeP, CoupePantalon coupeP, int couche, Niveau niveau) {
+        super(couleur, image, idDressing, idObjet, matiere,  sale, couche, niveau);
         this.typeP = typeP;
         this.coupeP = coupeP;
     }

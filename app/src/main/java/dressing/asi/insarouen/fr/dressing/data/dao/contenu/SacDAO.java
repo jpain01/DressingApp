@@ -5,9 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import dressing.asi.insarouen.fr.dressing.data.DAOBase;
 import dressing.asi.insarouen.fr.dressing.data.dao.ContenuDAO;
+import dressing.asi.insarouen.fr.dressing.data.model.Contenu;
 import dressing.asi.insarouen.fr.dressing.data.model.contenu.Sac;
+import dressing.asi.insarouen.fr.dressing.elements.Couleur;
+import dressing.asi.insarouen.fr.dressing.elements.sac.TypeSac;
 
 /**
  * Created by julie on 22/10/16.
@@ -49,5 +54,20 @@ public class SacDAO extends ContenuDAO {
         SQLiteDatabase mDb = open();
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
         mDb.close();
+    }
+
+
+    public ArrayList<Contenu> findAll(int idDressing) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM " + TABLE_NAME +" WHERE idDressing = "+ idDressing +";", new String[]{});
+        ArrayList<Contenu> sacList = new ArrayList<>();
+
+        for(res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
+            Sac s = new Sac(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), TypeSac.get(res.getString(res.getColumnIndex(TYPE))));
+            sacList.add(s);
+        }
+
+        res.close();
+        return sacList;
     }
 }

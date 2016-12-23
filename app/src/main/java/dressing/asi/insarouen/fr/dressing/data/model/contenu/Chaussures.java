@@ -14,8 +14,8 @@ public class Chaussures extends Contenu {
     public Chaussures() {
     }
 
-    public Chaussures(Couleur couleur, String image,  int idDressing, TypeChaussures typeC) {
-        super(couleur, image,  idDressing);
+    public Chaussures(Couleur couleur, String image,  int idDressing, int idObjet, TypeChaussures typeC) {
+        super(couleur, image,  idDressing, idObjet);
         this.typeC = typeC;
     }
 
