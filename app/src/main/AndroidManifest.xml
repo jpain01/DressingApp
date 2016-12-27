@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dressing.asi.insarouen.fr.dressing">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,12 @@
             android:label="Accueil"/>
         <activity android:name=".activity.notice.NoticeActivity"
             android:label="Notice d'utilisation"/>
+        <activity android:name=".activity.ajout.AjoutSacActivity"
+            android:label="Ajout Sac"/>
+        <activity android:name=".activity.ajout.AjoutChaussuresActivity"
+            android:label="Ajout Chaussures"/>
+        <activity android:name=".activity.ajout.AjoutVetementActivity"
+            android:label="Ajout vêtements"/>
     </application>
 
 </manifest>

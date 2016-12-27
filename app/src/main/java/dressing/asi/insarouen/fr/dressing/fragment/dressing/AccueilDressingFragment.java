@@ -24,6 +24,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutChaussuresActivity;
+import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutSacActivity;
+import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutVetementActivity;
 
 public class AccueilDressingFragment extends Fragment {
     private static final String USER_ID = "user_id";
@@ -96,16 +99,16 @@ public class AccueilDressingFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.sac:
-                                Toast toast = Toast.makeText(getActivity(), "Sac", Toast.LENGTH_SHORT);
-                                toast.show();
+                                Intent addSacIntent = new Intent(getActivity(), AjoutSacActivity.class);
+                                startActivity(addSacIntent);
                                 return true;
                             case R.id.chaussures:
-                                Toast toast1 = Toast.makeText(getActivity(), "Chaussures", Toast.LENGTH_SHORT);
-                                toast1.show();
+                                Intent addChaussuresIntent = new Intent(getActivity(), AjoutChaussuresActivity.class);
+                                startActivity(addChaussuresIntent);
                                 return true;
                             case R.id.vetement:
-                                Toast toast2 = Toast.makeText(getActivity(), "Vetement", Toast.LENGTH_SHORT);
-                                toast2.show();
+                                Intent addVetementIntent = new Intent(getActivity(), AjoutVetementActivity.class);
+                                startActivity(addVetementIntent);
                                 return true;
                             default:
                                 return true;

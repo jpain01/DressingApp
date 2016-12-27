@@ -111,4 +111,19 @@
     <string name="sac">Sac</string>
     <string name="chaussures">Chaussures</string>
     <string name="vetement">Vêtement</string>
+    <!-- Ajout sac -->
+    <string name="ajoutSac">Ajout d\'un sac</string>
+    <string name="typeSac">Type de sac</string>
+    <string name="couleurSac">Couleur de sac</string>
+    <!-- Ajout d'une paire de chaussures -->
+    <string name="ajoutChaussures">Ajout d\'une paire de chaussures</string>
+    <string name="typeChaussures">Type</string>
+    <string name="couleurChaussures">Couleur</string>
+    <!-- Ajout d'un vêtement -->
+    <string name="ajoutVetement">Ajout d\'un vêtement</string>
+    <string name="typeVetement">Type</string>
+    <string name="coupeVetement">Coupe</string>
+    <string name="matiereVetement">Matière</string>
+    <string name="couleurVetement">Couleur</string>
+    <string name="load">Ajoutez une photo</string>
 </resources>

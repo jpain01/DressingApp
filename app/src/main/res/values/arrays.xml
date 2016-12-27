@@ -174,7 +174,7 @@
         <item>Roux</item>
     </string-array>
 
-    <string-array name="arrayPreferedColor">
+    <string-array name="arrayColor">
         <item>Bleu</item>
         <item>Bleu clair</item>
         <item>Bleu foncé</item>
@@ -216,7 +216,50 @@
         <item>A</item>
         <item>X</item>
     </string-array>
+    
+    <string-array name="arrayTypeSac">
+        <item>sac à dos</item>
+        <item>sac à main</item>
+        <item>pochette</item>
+    </string-array>
 
+    <string-array name="arrayTypeChaussures">
+        <item>escarpins</item>
+        <item>ballerines</item>
+        <item>baskets</item>
+        <item>bottes plattes</item>
+        <item>bottes à talons</item>
+        <item>sandales</item>
+    </string-array>
+    
+    <string-array name="arrayTypeVetement">
+        <item>tee-shirt</item>
+        <item>chemisier</item>
+        <item>pull</item>
+        <item>veste</item>
+        <item>manteau</item>
+        <item>pantalon</item>
+        <item>pantacourt</item>
+        <item>jogging</item>
+        <item>jupe</item>
+        <item>short</item>
+        <item>robe</item>
+        <item>combinaison</item>
+    </string-array>
+
+    <string-array name="arrayMatiereVetement">
+        <item>laine</item>
+        <item>coton</item>
+        <item>jean</item>
+        <item>lin</item>
+        <item>velours</item>
+        <item>cuir</item>
+        <item>dentelle</item>
+        <item>daim</item>
+        <item>satin</item>
+        <item>paillette</item>
+    </string-array>
+    
     <string-array name="strArrDrawerList">
         <item>Accueil</item>
         <item>Dressing</item>

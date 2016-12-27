@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:entries="@array/arrayPreferedColor"/>
+                android:entries="@array/arrayColor"/>
 
         </RelativeLayout>
 
