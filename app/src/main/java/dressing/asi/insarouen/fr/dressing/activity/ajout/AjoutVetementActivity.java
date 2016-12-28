@@ -1,6 +1,11 @@
 package dressing.asi.insarouen.fr.dressing.activity.ajout;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -8,11 +13,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.AutreDAO;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.HautDAO;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.PantalonDAO;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Autre;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Haut;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Pantalon;
+import dressing.asi.insarouen.fr.dressing.elements.Couleur;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.Matiere;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.autre.CoupeAutre;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.autre.TypeAutre;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.haut.CoupeHaut;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.haut.TypeHaut;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.pantalon.CoupePantalon;
+import dressing.asi.insarouen.fr.dressing.elements.vetement.pantalon.TypePantalon;
 
 /**
  * Created by julie on 23/12/16.
@@ -20,6 +41,13 @@ import dressing.asi.insarouen.fr.dressing.R;
 
 public class AjoutVetementActivity extends AppCompatActivity {
     private Spinner coupeSpinner;
+    private static int RESULT_LOAD_IMAGE = 1;
+    private static final String DRESSING_ID = "dressing_id";
+    private int dressingId;
+    private String pathImage;
+    private Couleur couleur;
+    private Matiere matiere;
+    private String type;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +59,9 @@ public class AjoutVetementActivity extends AppCompatActivity {
         coupeSpinner = (Spinner) findViewById(R.id.coupeVetement);
         Spinner matiereSpinner = (Spinner) findViewById(R.id.matiereVetement);
         Spinner couleurSpinner = (Spinner) findViewById(R.id.colorVetement);
-        Button validationButton = (Button) findViewById(R.id.validerAjoutVetement);
+        Button validerButton = (Button) findViewById(R.id.validerAjoutVetement);
+        Button loadButton = (Button) findViewById(R.id.loadPicture);
+        dressingId = getIntent().getIntExtra(DRESSING_ID, 0);
 
 
         // toolbar
@@ -85,16 +115,121 @@ public class AjoutVetementActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
             }
-
         });
+
+        // Load la photo
+        loadButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        validerButton.setOnClickListener(new CreationVetementListener());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
-//            overridePendingTransition(R.anim.stay, R.anim.slide_down); //Animation transition slide down
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            pathImage = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView imageView = (ImageView) findViewById(R.id.imgView);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(pathImage));
+        }
+    }
+
+    private class CreationVetementListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // Récupération des éléments
+            Spinner typeSpinner = (Spinner) findViewById(R.id.typeVetement);
+            type = typeSpinner.getSelectedItem().toString();
+            coupeSpinner = (Spinner) findViewById(R.id.coupeVetement);
+            Spinner matiereSpinner = (Spinner) findViewById(R.id.matiereVetement);
+            matiere = Matiere.getfromInt(matiereSpinner.getSelectedItemPosition()+ 1);
+            Spinner couleurSpinner = (Spinner) findViewById(R.id.colorVetement);
+            couleur = new Couleur(couleurSpinner.getSelectedItemPosition() + 1);
+            Button loadButton = (Button) findViewById(R.id.loadPicture);
+
+
+            //Vérification infos
+            if ( pathImage==null ) {
+                loadButton.setError(getString(R.string.error));
+            } else {
+                // Le type de vêtement va déterminer si c'est un haut, pantalon ou autre :
+                switch(type) {
+                    case "tee-shirt":
+                    case "chemisier":
+                    case "pull":
+                    case "veste":
+                    case "manteau":
+                        // Creation de l'objet haut
+                        Haut h = new Haut(couleur, pathImage, dressingId, 0, matiere, false, TypeHaut.getfromInt(typeSpinner.getSelectedItemPosition()+1), CoupeHaut.getfromInt(coupeSpinner.getSelectedItemPosition()+1), 0, null);
+
+                        // Insertion du sac en BD
+                        HautDAO haut = new HautDAO(getApplicationContext());
+                        haut.open();
+                        haut.insert(h);
+                        haut.close();
+
+                        Toast t = Toast.makeText(getApplication(),h.toString(),Toast.LENGTH_LONG);
+                        t.show();
+                        break;
+                    case "jupe":
+                    case "short":
+                    case "robe":
+                    case "combinaison":
+                        // Creation de l'objet autre
+                        Autre a = new Autre(couleur, pathImage, dressingId, 0, matiere, false, TypeAutre.getfromInt(typeSpinner.getSelectedItemPosition()-4), CoupeAutre.getfromInt(coupeSpinner.getSelectedItemPosition()+1), 0, null);
+
+                        // Insertion du sac en BD
+                        AutreDAO autre = new AutreDAO(getApplicationContext());
+                        autre.open();
+                        autre.insert(a);
+                        autre.close();
+
+                        Toast t1 = Toast.makeText(getApplication(),a.toString(),Toast.LENGTH_LONG);
+                        t1.show();
+                        break;
+                    default:
+                        // Creation de l'objet Pantalon
+                        Pantalon p = new Pantalon(couleur, pathImage, dressingId, 0, matiere, false, TypePantalon.getfromInt(typeSpinner.getSelectedItemPosition()-8), CoupePantalon.getfromInt(coupeSpinner.getSelectedItemPosition()+1), 0, null);
+
+                        // Insertion du sac en BD
+                        PantalonDAO pantalon = new PantalonDAO(getApplicationContext());
+                        pantalon.open();
+                        pantalon.insert(p);
+                        pantalon.close();
+
+                        Toast t2 = Toast.makeText(getApplication(),p.toString(),Toast.LENGTH_LONG);
+                        t2.show();
+                        break;
+                }
+            }
+        }
     }
 }

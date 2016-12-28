@@ -27,10 +27,13 @@ import dressing.asi.insarouen.fr.dressing.R;
 import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutChaussuresActivity;
 import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutSacActivity;
 import dressing.asi.insarouen.fr.dressing.activity.ajout.AjoutVetementActivity;
+import dressing.asi.insarouen.fr.dressing.data.dao.UtilisateurDAO;
 
 public class AccueilDressingFragment extends Fragment {
     private static final String USER_ID = "user_id";
+    private static final String DRESSING_ID = "dressing_id";
     private int userId;
+    private int dressingId;
     private RecyclerView mRecyclerView;
 
     public AccueilDressingFragment() {
@@ -56,6 +59,12 @@ public class AccueilDressingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Récupération de l'identifiant du dressing de l'utilisateur courant
+        UtilisateurDAO u = new UtilisateurDAO(getActivity());
+        u.open();
+        dressingId = u.getIdDressing(userId);
+        u.close();
+
         // Redéfinir le titre de la toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Dressing");
 
@@ -100,14 +109,17 @@ public class AccueilDressingFragment extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.sac:
                                 Intent addSacIntent = new Intent(getActivity(), AjoutSacActivity.class);
+                                addSacIntent.putExtra(DRESSING_ID, dressingId);
                                 startActivity(addSacIntent);
                                 return true;
                             case R.id.chaussures:
                                 Intent addChaussuresIntent = new Intent(getActivity(), AjoutChaussuresActivity.class);
+                                addChaussuresIntent.putExtra(DRESSING_ID, dressingId);
                                 startActivity(addChaussuresIntent);
                                 return true;
                             case R.id.vetement:
                                 Intent addVetementIntent = new Intent(getActivity(), AjoutVetementActivity.class);
+                                addVetementIntent.putExtra(DRESSING_ID, dressingId);
                                 startActivity(addVetementIntent);
                                 return true;
                             default:

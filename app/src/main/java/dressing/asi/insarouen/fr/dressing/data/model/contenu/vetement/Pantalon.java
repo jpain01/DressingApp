@@ -40,4 +40,9 @@ public class Pantalon extends Vetement {
     public void setCoupeP(CoupePantalon coupeP) {
         this.coupeP = coupeP;
     }
+
+    @Override
+    public String toString() {
+        return "\nPantalon:\n\t" + "\n\tType : " + typeP.name() + "\n\tCoupe : " + getCoupeP() + "\n\tCouleur : " + getCouleur() + "\n\tidDressing : " + getIdDressing() + "\n\tidObjet : " + getIdObjet();
+    }
 }

@@ -126,4 +126,5 @@
     <string name="matiereVetement">Matière</string>
     <string name="couleurVetement">Couleur</string>
     <string name="load">Ajoutez une photo</string>
+    <string name="error">Vous devez ajouter une photo</string>
 </resources>

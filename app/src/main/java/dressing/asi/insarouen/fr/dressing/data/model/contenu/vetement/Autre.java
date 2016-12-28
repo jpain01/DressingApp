@@ -60,4 +60,9 @@ public class Autre extends Vetement {
     public void setCoupeA(CoupeAutre coupeA) {
         this.coupeA = coupeA;
     }
+
+    @Override
+    public String toString() {
+        return "\nAutre :\n\t" + "\n\tType : " + typeA.name() + "\n\tCoupe : " + getCoupeA() + "\n\tCouleur : " + getCouleur() + "\n\tidDressing : " + getIdDressing() + "\n\tidObjet : " + getIdObjet();
+    }
 }

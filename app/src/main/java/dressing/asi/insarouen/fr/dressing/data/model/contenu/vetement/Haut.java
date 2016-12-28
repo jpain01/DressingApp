@@ -40,4 +40,9 @@ public class Haut extends Vetement {
     public void setCoupeH(CoupeHaut coupeH) {
         this.coupeH = coupeH;
     }
+
+    @Override
+    public String toString() {
+        return "\nHaut :\n\t" + "\n\tType : " + typeH.name() + "\n\tCoupe : " + getCoupeH() + "\n\tCouleur : " + getCouleur() + "\n\tidDressing : " + getIdDressing() + "\n\tidObjet : " + getIdObjet();
+    }
 }

@@ -24,4 +24,9 @@ public class Sac extends Contenu {
     public void setTypeS(TypeSac typeS) {
         this.typeS = typeS;
     }
+
+    @Override
+    public String toString() {
+        return "Sac:\n\t" + "\n\tType : " + typeS + "\n\tCouleur : " + getCouleur() + "\n\tidDressing : " + getIdDressing() + "\n\tidObjet : " + getIdObjet() + "\n\timage :" + getImage();
+    }
 }

@@ -26,4 +26,9 @@ public class Chaussures extends Contenu {
     public void setTypeC(TypeChaussures typeC) {
         this.typeC = typeC;
     }
+
+    @Override
+    public String toString() {
+        return "\nChaussures:\n\t" + "\n\tType : " + typeC.name() + "\n\tCouleur : " + getCouleur() + "\n\tidDressing : " + getIdDressing() + "\n\tidObjet : " + getIdObjet();
+    }
 }

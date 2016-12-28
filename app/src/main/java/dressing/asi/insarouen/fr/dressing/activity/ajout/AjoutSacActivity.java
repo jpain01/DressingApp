@@ -13,8 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.data.dao.contenu.SacDAO;
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.Sac;
+import dressing.asi.insarouen.fr.dressing.elements.Couleur;
+import dressing.asi.insarouen.fr.dressing.elements.sac.TypeSac;
 
 /**
  * Created by julie on 23/12/16.
@@ -22,6 +27,11 @@ import dressing.asi.insarouen.fr.dressing.R;
 
 public class AjoutSacActivity extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
+    private static final String DRESSING_ID = "dressing_id";
+    private int dressingId;
+    private String pathImage;
+    private Couleur couleur;
+    private TypeSac typeS;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,11 +39,9 @@ public class AjoutSacActivity extends AppCompatActivity {
         this.setContentView(R.layout.ajout_sac_activity);
 
         // Récupération des éléments
-        Spinner typeSpinner = (Spinner) findViewById(R.id.typeSac);
-        Spinner couleurSpinner = (Spinner) findViewById(R.id.colorSac);
-        ImageView imgView = (ImageView) findViewById(R.id.imgView);
         Button loadButton = (Button) findViewById(R.id.loadPicture);
         Button validerButton = (Button) findViewById(R.id.validerAjoutSac);
+        dressingId = getIntent().getIntExtra(DRESSING_ID, 0);
 
         // toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.dressingToolbar);
@@ -57,13 +65,18 @@ public class AjoutSacActivity extends AppCompatActivity {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+
+        // Attention :
+        // normalement gérer les permissions grâce à ce tuto : http://www.captechconsulting.com/blogs/runtime-permissions-best-practices-and-how-to-gracefully-handle-permission-removal
+        // Mais là pas beaucoup de temps alors changer la version du target sdk version dans le gradle de 23 à 22
+
+        validerButton.setOnClickListener(new CreationSacListener());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
-//            overridePendingTransition(R.anim.stay, R.anim.slide_down); //Animation transition slide down
         }
         return super.onOptionsItemSelected(item);
     }
@@ -76,16 +89,46 @@ public class AjoutSacActivity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
+            pathImage = cursor.getString(columnIndex);
             cursor.close();
 
             ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setImageBitmap(BitmapFactory.decodeFile(pathImage));
+        }
+    }
+
+    private class CreationSacListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // Récupération des éléments
+            Button loadButton = (Button) findViewById(R.id.loadPicture);
+            Spinner typeSpinner = (Spinner) findViewById(R.id.typeSac);
+            typeS = TypeSac.getfromInt(typeSpinner.getSelectedItemPosition()+ 1);
+            Spinner couleurSpinner = (Spinner) findViewById(R.id.colorSac);
+            couleur = new Couleur(couleurSpinner.getSelectedItemPosition() + 1);
+
+            //Vérification infos
+            if ( pathImage==null ) {
+                loadButton.setError(getString(R.string.error));
+            } else {
+                // Creation de l'objet sac
+                Sac s = new Sac(couleur, pathImage, dressingId, 0, typeS);
+
+                // Insertion du sac en BD
+                SacDAO sac = new SacDAO(getApplicationContext());
+                sac.open();
+                sac.insert(s);
+                sac.close();
+
+                Toast t = Toast.makeText(getApplication(),s.toString(),Toast.LENGTH_LONG);
+                t.show();
+            }
+
         }
     }
 }

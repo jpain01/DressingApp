@@ -238,13 +238,13 @@
         <item>pull</item>
         <item>veste</item>
         <item>manteau</item>
-        <item>pantalon</item>
-        <item>pantacourt</item>
-        <item>jogging</item>
         <item>jupe</item>
         <item>short</item>
         <item>robe</item>
         <item>combinaison</item>
+        <item>pantalon</item>
+        <item>pantacourt</item>
+        <item>jogging</item>
     </string-array>
 
     <string-array name="arrayMatiereVetement">

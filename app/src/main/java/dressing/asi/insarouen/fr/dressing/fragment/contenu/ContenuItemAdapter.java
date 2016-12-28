@@ -2,6 +2,7 @@ package dressing.asi.insarouen.fr.dressing.fragment.contenu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,7 +49,13 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
 //                mContext.startActivity(intent);
 //            }
 //        });
-        dressingViewHolder.mImageView.setImageResource(mContext.getResources().getIdentifier(contenu.getImage(), "drawable", mContext.getPackageName()));
+        if (BitmapFactory.decodeFile(contenu.getImage())==null) {
+            dressingViewHolder.mImageView.setImageResource(mContext.getResources().getIdentifier(contenu.getImage(), "drawable", mContext.getPackageName()));
+        } else {
+            dressingViewHolder.mImageView.setImageBitmap(BitmapFactory.decodeFile(contenu.getImage()));
+        }
+
+
     }
 
     @Override
@@ -64,13 +71,11 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
     }
 
     public static class DressingViewHolder extends RecyclerView.ViewHolder {
-//        protected TextView mTitleView;
         protected ImageView mImageView;
         protected CardView mCardView;
 
         public DressingViewHolder(View view) {
             super(view);
-//            mTitleView = (TextView) view.findViewById(R.id.titleContenu);
             mImageView = (ImageView) view.findViewById(R.id.imgContenuItem);
             mCardView = (CardView) view.findViewById(R.id.itemContenu);
         }

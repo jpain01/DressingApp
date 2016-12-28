@@ -83,4 +83,16 @@ public class Vetement extends Contenu {
         return this instanceof Pantalon;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("");
+        s.append("\nVetement : \n\t idObjet : " + getIdObjet() + "\n\t Signes : ");
+
+        for (Morphologie si : signes) {
+            s.append(si.toString() + ", ");
+        }
+        s.append("\n\t Matiere : " + matiere + "\n\t Couleur : " + getCouleur() + "\n\t Couche : " + couche + "\n\t Est sale : " + sale);
+        return s.toString();
+    }
+
 }
