@@ -6,6 +6,7 @@
     <string name="corbeille">Corbeille à linge</string>
     <string name="notice">Notice d\'utilisation</string>
     <string name="deconnexion">Déconnexion</string>
+    <string name="delete">Supprimer</string>
     <!-- Drawer -->
     <string name="strOpenDrawer">Open Drawer</string>
     <string name="strCloseDrawer">Close Drawer</string>
@@ -121,10 +122,10 @@
     <string name="couleurChaussures">Couleur</string>
     <!-- Ajout d'un vêtement -->
     <string name="ajoutVetement">Ajout d\'un vêtement</string>
-    <string name="typeVetement">Type</string>
-    <string name="coupeVetement">Coupe</string>
-    <string name="matiereVetement">Matière</string>
-    <string name="couleurVetement">Couleur</string>
+    <string name="type">Type</string>
+    <string name="coupe">Coupe</string>
+    <string name="matiere">Matière</string>
+    <string name="couleur">Couleur</string>
     <string name="load">Ajoutez une photo</string>
     <string name="error">Vous devez ajouter une photo</string>
 </resources>

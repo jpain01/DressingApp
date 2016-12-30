@@ -96,11 +96,24 @@ public class HautDAO extends VetementDAO {
 
         for(res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
             Haut h = new Haut(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), Matiere.get(res.getString(res.getColumnIndex(MATIERE))), (res.getInt(res.getColumnIndex(SALE_PROPRE)) ==1), TypeHaut.get(res.getString(res.getColumnIndex(TYPE))), CoupeHaut.get(res.getString(res.getColumnIndex(COUPE))), res.getInt(res.getColumnIndex(COUCHE)), Niveau.get(res.getString(res.getColumnIndex(NIVEAU))));
-            Log.v("haut", h.toString());
             hautList.add(h);
         }
 
         res.close();
         return hautList;
+    }
+
+    public Contenu findById(int idDressing, int id) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM "+ TABLE_NAME +" WHERE idDressing = "+ idDressing + " AND "+ KEY +"="+ id +";", new String[]{});
+
+        Haut h = null;
+        if (res.moveToFirst()) {
+            h = new Haut(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), Matiere.get(res.getString(res.getColumnIndex(MATIERE))), (res.getInt(res.getColumnIndex(SALE_PROPRE)) ==1), TypeHaut.get(res.getString(res.getColumnIndex(TYPE))), CoupeHaut.get(res.getString(res.getColumnIndex(COUPE))), res.getInt(res.getColumnIndex(COUCHE)), Niveau.get(res.getString(res.getColumnIndex(NIVEAU))));
+        }
+
+        mDb.close();
+        res.close();
+        return h;
     }
 }

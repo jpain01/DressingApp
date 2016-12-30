@@ -119,16 +119,6 @@ public class AccueilActivity extends AppCompatActivity {
                             if(position != null)
                                 mDrwDrawerList.setItemChecked(Integer.parseInt(position), true);
 
-//                            //Pour avoir la fleche back
-//                            if(getSupportActionBar() != null)
-//                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//                            if(toolbar != null)
-//                                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//                                        onBackPressed();
-//                                    }
-//                                });
                         } else {
                             mDrwDrawerList.setItemChecked(MENU_ACCUEIL, true);
 

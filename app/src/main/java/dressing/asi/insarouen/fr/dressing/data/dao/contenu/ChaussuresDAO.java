@@ -60,14 +60,28 @@ public class ChaussuresDAO extends ContenuDAO {
     public ArrayList<Contenu> findAll(int idDressing) {
         SQLiteDatabase mDb = open();
         Cursor res = mDb.rawQuery("select * FROM " + TABLE_NAME +" WHERE idDressing = "+ idDressing +";", new String[]{});
-        ArrayList<Contenu> sacList = new ArrayList<>();
+        ArrayList<Contenu> chaussuresList = new ArrayList<>();
 
         for(res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
             Chaussures c = new Chaussures(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), TypeChaussures.get(res.getString(res.getColumnIndex(TYPE))));
-            sacList.add(c);
+            chaussuresList.add(c);
         }
 
         res.close();
-        return sacList;
+        return chaussuresList;
+    }
+
+    public Contenu findById(int idDressing, int id) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM "+ TABLE_NAME +" WHERE idDressing = "+ idDressing + " AND "+ KEY +"="+ id +";", new String[]{});
+
+        Chaussures c = null;
+        if (res.moveToFirst()) {
+            c = new Chaussures(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), TypeChaussures.get(res.getString(res.getColumnIndex(TYPE))));
+        }
+
+        mDb.close();
+        res.close();
+        return c;
     }
 }

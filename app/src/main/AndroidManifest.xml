@@ -34,6 +34,8 @@
             android:label="Ajout Chaussures"/>
         <activity android:name=".activity.ajout.AjoutVetementActivity"
             android:label="Ajout vêtements"/>
+        <activity android:name=".activity.consultation.ConsultationActivity"
+            android:label="Consultation"/>
     </application>
 
 </manifest>

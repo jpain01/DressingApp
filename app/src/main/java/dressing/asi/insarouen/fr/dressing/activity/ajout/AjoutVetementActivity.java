@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.activity.consultation.ConsultationActivity;
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.AutreDAO;
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.HautDAO;
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.PantalonDAO;
@@ -43,6 +44,8 @@ public class AjoutVetementActivity extends AppCompatActivity {
     private Spinner coupeSpinner;
     private static int RESULT_LOAD_IMAGE = 1;
     private static final String DRESSING_ID = "dressing_id";
+    public static final String CONTENU_TYPE = "type";
+    public static final String CONTENU_ID = "id";
     private int dressingId;
     private String pathImage;
     private Couleur couleur;
@@ -196,8 +199,12 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         haut.insert(h);
                         haut.close();
 
-                        Toast t = Toast.makeText(getApplication(),h.toString(),Toast.LENGTH_LONG);
-                        t.show();
+                        Intent intentH = new Intent(getApplicationContext(), ConsultationActivity.class);
+                        intentH.putExtra(CONTENU_ID, h.getIdObjet());
+                        intentH.putExtra(DRESSING_ID, h.getIdDressing());
+                        intentH.putExtra(CONTENU_TYPE, "haut");
+                        intentH.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intentH);
                         break;
                     case "jupe":
                     case "short":
@@ -212,8 +219,12 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         autre.insert(a);
                         autre.close();
 
-                        Toast t1 = Toast.makeText(getApplication(),a.toString(),Toast.LENGTH_LONG);
-                        t1.show();
+                        Intent intentA = new Intent(getApplicationContext(), ConsultationActivity.class);
+                        intentA.putExtra(CONTENU_ID, a.getIdObjet());
+                        intentA.putExtra(DRESSING_ID, a.getIdDressing());
+                        intentA.putExtra(CONTENU_TYPE, "autre");
+                        intentA.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intentA);
                         break;
                     default:
                         // Creation de l'objet Pantalon
@@ -225,8 +236,12 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         pantalon.insert(p);
                         pantalon.close();
 
-                        Toast t2 = Toast.makeText(getApplication(),p.toString(),Toast.LENGTH_LONG);
-                        t2.show();
+                        Intent intentP = new Intent(getApplicationContext(), ConsultationActivity.class);
+                        intentP.putExtra(CONTENU_ID, p.getIdObjet());
+                        intentP.putExtra(DRESSING_ID, p.getIdDressing());
+                        intentP.putExtra(CONTENU_TYPE, "pantalon");
+                        intentP.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intentP);
                         break;
                 }
             }

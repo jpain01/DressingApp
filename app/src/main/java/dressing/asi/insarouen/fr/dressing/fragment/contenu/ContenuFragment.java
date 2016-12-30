@@ -3,17 +3,15 @@ package dressing.asi.insarouen.fr.dressing.fragment.contenu;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bignerdranch.android.multiselector.MultiSelector;
 
 import java.util.ArrayList;
 
@@ -27,8 +25,6 @@ import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.HautDAO;
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.vetement.PantalonDAO;
 import dressing.asi.insarouen.fr.dressing.data.model.Contenu;
 
-import static android.R.id.toggle;
-import static dressing.asi.insarouen.fr.dressing.R.layout.toolbar;
 
 /**
  * Created by julie on 20/12/16.
@@ -44,7 +40,6 @@ public class ContenuFragment extends Fragment {
 
     public ContenuFragment() {
     }
-
 
     public static ContenuFragment newInstance(int userId, String typeContenu) {
         ContenuFragment fragment = new ContenuFragment();
@@ -199,7 +194,7 @@ public class ContenuFragment extends Fragment {
             mRecyclerView.setLayoutManager(gridLayoutManager);
 
             // Création de l'adapter
-            ContenuItemAdapter contenuItemAdapter = new ContenuItemAdapter(listeContenus, getActivity());
+            ContenuItemAdapter contenuItemAdapter = new ContenuItemAdapter(listeContenus, getActivity(), mRecyclerView);
             mRecyclerView.setAdapter(contenuItemAdapter);
 
             return view;

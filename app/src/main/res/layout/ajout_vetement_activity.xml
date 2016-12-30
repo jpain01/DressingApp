@@ -51,7 +51,7 @@
                     android:id="@+id/labelTypeVetement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/typeVetement"/>
+                    android:text="@string/type"/>
 
                 <Spinner
                     android:id="@+id/typeVetement"
@@ -73,7 +73,7 @@
                     android:id="@+id/labelCoupeVetement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/coupeVetement" />
+                    android:text="@string/coupe" />
 
                 <Spinner
                     android:id="@+id/coupeVetement"
@@ -96,7 +96,7 @@
                     android:id="@+id/labelMatiereVetement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/matiereVetement"/>
+                    android:text="@string/matiere"/>
 
                 <Spinner
                     android:id="@+id/matiereVetement"
@@ -118,7 +118,7 @@
                     android:id="@+id/labelColorVetement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/couleurVetement"/>
+                    android:text="@string/couleur"/>
 
                 <Spinner
                     android:id="@+id/colorVetement"

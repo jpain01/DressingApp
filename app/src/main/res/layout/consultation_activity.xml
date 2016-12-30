@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:paddingBottom="2dp"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@+id/image"
+            android:background="@color/colorFushia"
+            >
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/description"
+            android:layout_below="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingTop="40dp"
+            android:paddingRight="60dp"
+            android:paddingLeft="60dp">
+
+            <TextView
+                android:id="@+id/typeContenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorFushia"
+                android:textStyle="bold"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/labelCouleur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/typeContenu"
+                android:textColor="@color/colorFushia"
+                android:text="@string/couleur"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/couleur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorFushia"
+                android:layout_below="@+id/typeContenu"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/labelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/couleur"
+                android:textColor="@color/colorFushia"
+                android:text="@string/type"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorFushia"
+                android:layout_below="@+id/couleur"
+                android:textSize="15sp"/>
+
+
+            <TextView
+                android:id="@+id/labelCoupe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/type"
+                android:textColor="@color/colorFushia"
+                android:text="@string/coupe"
+                android:visibility="invisible"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/coupe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorFushia"
+                android:layout_below="@+id/type"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/labelMatiere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/coupe"
+                android:textColor="@color/colorFushia"
+                android:text="@string/matiere"
+                android:visibility="invisible"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/matiere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorFushia"
+                android:layout_below="@+id/coupe"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

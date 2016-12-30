@@ -50,7 +50,7 @@ public class SacDAO extends ContenuDAO {
         mDb.close();
     }
 
-    public void delete(long id) {
+    public void delete(int id) {
         SQLiteDatabase mDb = open();
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
         mDb.close();
@@ -69,5 +69,19 @@ public class SacDAO extends ContenuDAO {
 
         res.close();
         return sacList;
+    }
+
+    public Contenu findById(int idDressing, int id) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM "+ TABLE_NAME +" WHERE idDressing = "+ idDressing + " AND "+ KEY +"="+ id +";", new String[]{});
+
+        Sac s = null;
+        if (res.moveToFirst()) {
+            s = new Sac(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), TypeSac.get(res.getString(res.getColumnIndex(TYPE))));
+        }
+
+        mDb.close();
+        res.close();
+        return s;
     }
 }

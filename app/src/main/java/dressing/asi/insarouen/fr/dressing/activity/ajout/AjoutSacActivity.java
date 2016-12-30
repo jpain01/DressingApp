@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import dressing.asi.insarouen.fr.dressing.R;
+import dressing.asi.insarouen.fr.dressing.activity.consultation.ConsultationActivity;
 import dressing.asi.insarouen.fr.dressing.data.dao.contenu.SacDAO;
 import dressing.asi.insarouen.fr.dressing.data.model.contenu.Sac;
 import dressing.asi.insarouen.fr.dressing.elements.Couleur;
@@ -28,6 +29,8 @@ import dressing.asi.insarouen.fr.dressing.elements.sac.TypeSac;
 public class AjoutSacActivity extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
     private static final String DRESSING_ID = "dressing_id";
+    public static final String CONTENU_ID = "id";
+    public static final String CONTENU_TYPE = "type";
     private int dressingId;
     private String pathImage;
     private Couleur couleur;
@@ -125,8 +128,12 @@ public class AjoutSacActivity extends AppCompatActivity {
                 sac.insert(s);
                 sac.close();
 
-                Toast t = Toast.makeText(getApplication(),s.toString(),Toast.LENGTH_LONG);
-                t.show();
+                Intent intent = new Intent(getApplicationContext(), ConsultationActivity.class);
+                intent.putExtra(CONTENU_ID, s.getIdObjet());
+                intent.putExtra(DRESSING_ID, s.getIdDressing());
+                intent.putExtra(CONTENU_TYPE, "sac");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
             }
 
         }

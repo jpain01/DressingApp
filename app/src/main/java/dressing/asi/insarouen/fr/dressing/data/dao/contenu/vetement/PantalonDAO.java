@@ -102,4 +102,18 @@ public class PantalonDAO extends VetementDAO {
         res.close();
         return pantalonList;
     }
+
+    public Contenu findById(int idDressing, int id) {
+        SQLiteDatabase mDb = open();
+        Cursor res = mDb.rawQuery("select * FROM "+ TABLE_NAME +" WHERE idDressing = "+ idDressing + " AND "+ KEY +"="+ id +";", new String[]{});
+
+        Pantalon p = null;
+        if (res.moveToFirst()) {
+            p = new Pantalon(new Couleur(res.getInt(res.getColumnIndex(COULEUR))), res.getString(res.getColumnIndex(IMAGE)), res.getInt(res.getColumnIndex(DRESSING)), res.getInt(res.getColumnIndex(KEY)), Matiere.get(res.getString(res.getColumnIndex(MATIERE))), (res.getInt(res.getColumnIndex(SALE_PROPRE)) ==1), TypePantalon.get(res.getString(res.getColumnIndex(TYPE))), CoupePantalon.get(res.getString(res.getColumnIndex(COUPE))), res.getInt(res.getColumnIndex(COUCHE)), Niveau.get(res.getString(res.getColumnIndex(NIVEAU))));
+        }
+
+        mDb.close();
+        res.close();
+        return p;
+    }
 }
