@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import dressing.asi.insarouen.fr.dressing.data.dao.UtilisateurDAO;
 import dressing.asi.insarouen.fr.dressing.data.model.Utilisateur;
 import dressing.asi.insarouen.fr.dressing.elements.utilisateur.Morphologie;
 import dressing.asi.insarouen.fr.dressing.fragment.dressing.AccueilDressingFragment;
+
+import static dressing.asi.insarouen.fr.dressing.activity.accueil.AccueilActivity.MENU_DRESSING;
 
 public class AccueilFragment extends Fragment {
     private static final String USER_ID = "user_id";
@@ -127,6 +130,9 @@ public class AccueilFragment extends Fragment {
 
             // Remplace notre vue par le fragment
             fragmentTransaction.replace(R.id.frame, dressingFragment);
+
+            ListView mDrwDrawerList = (ListView) getActivity().findViewById(R.id.drwLvDrawerList);
+            mDrwDrawerList.setItemChecked(MENU_DRESSING, true);
 
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();

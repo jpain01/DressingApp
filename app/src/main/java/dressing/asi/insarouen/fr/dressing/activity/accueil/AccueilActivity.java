@@ -39,10 +39,10 @@ public class AccueilActivity extends AppCompatActivity {
     private DrawerLayout mDrwDrawerLayout;
     private ListView mDrwDrawerList;
     private int id;
-    private static final int MENU_ACCUEIL = 1;
-    private static final int MENU_DRESSING = 2;
-    private static final int MENU_CORBEILLE = 3;
-    private static final int MENU_TENUE = 4;
+    public static final int MENU_ACCUEIL = 1;
+    public static final int MENU_DRESSING = 2;
+    public static final int MENU_CORBEILLE = 3;
+    public static final int MENU_TENUE = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -206,6 +206,7 @@ public class AccueilActivity extends AppCompatActivity {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent disconectIntent = new Intent(AccueilActivity.this, ConnexionActivity.class);
+                                disconectIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(disconectIntent);
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:

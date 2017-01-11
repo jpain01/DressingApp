@@ -2,11 +2,14 @@ package dressing.asi.insarouen.fr.dressing.activity.contenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,7 @@ import com.bignerdranch.android.multiselector.MultiSelector;
 import com.bignerdranch.android.multiselector.SwappingHolder;
 
 import java.util.List;
+import java.util.StringTokenizer;
 
 import dressing.asi.insarouen.fr.dressing.R;
 import dressing.asi.insarouen.fr.dressing.activity.consultation.ConsultationActivity;
@@ -53,52 +57,68 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             super.onCreateActionMode(actionMode, menu);
-            ((AppCompatActivity)mContext).getMenuInflater().inflate(R.menu.menu_delete_contenu, menu);
+            ((AppCompatActivity) mContext).getMenuInflater().inflate(R.menu.menu_delete_contenu, menu);
             return true;
         }
 
         @Override
-        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        public boolean onActionItemClicked(final ActionMode actionMode, MenuItem menuItem) {
             if (menuItem.getItemId() == R.id.delete) {
-                actionMode.finish();
-
-                for (int i = mContenuList.size(); i >= 0; i--) {
-                    if (mMultiSelector.isSelected(i, 0)) { // (1)
-                        // remove item from list
-                        Contenu contenu = mContenuList.get(i);
-                        if (contenu instanceof Sac) {
-                            SacDAO sac = new SacDAO(mContext);
-                            sac.open();
-                            sac.delete(contenu.getIdObjet());
-                            sac.close();
-                        } else if (contenu instanceof Chaussures) {
-                            ChaussuresDAO chaussures = new ChaussuresDAO(mContext);
-                            chaussures.open();
-                            chaussures.delete(contenu.getIdObjet());
-                            chaussures.close();
-                        } else if (contenu instanceof Haut) {
-                            HautDAO haut = new HautDAO(mContext);
-                            haut.open();
-                            haut.delete(contenu.getIdObjet());
-                            haut.close();
-                        } else if (contenu instanceof Pantalon) {
-                            PantalonDAO pantalon = new PantalonDAO(mContext);
-                            pantalon.open();
-                            pantalon.delete(contenu.getIdObjet());
-                            pantalon.close();
-                        } else {
-                            AutreDAO autre = new AutreDAO(mContext);
-                            autre.open();
-                            autre.delete(contenu.getIdObjet());
-                            autre.close();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                for (int i = mContenuList.size(); i >= 0; i--) {
+                                    if (mMultiSelector.isSelected(i, 0)) { // (1)
+                                        // remove item from list
+                                        Contenu contenu = mContenuList.get(i);
+                                        if (contenu instanceof Sac) {
+                                            SacDAO sac = new SacDAO(mContext);
+                                            sac.open();
+                                            sac.delete(contenu.getIdObjet());
+                                            sac.close();
+                                        } else if (contenu instanceof Chaussures) {
+                                            ChaussuresDAO chaussures = new ChaussuresDAO(mContext);
+                                            chaussures.open();
+                                            chaussures.delete(contenu.getIdObjet());
+                                            chaussures.close();
+                                        } else if (contenu instanceof Haut) {
+                                            HautDAO haut = new HautDAO(mContext);
+                                            haut.open();
+                                            haut.delete(contenu.getIdObjet());
+                                            haut.close();
+                                        } else if (contenu instanceof Pantalon) {
+                                            PantalonDAO pantalon = new PantalonDAO(mContext);
+                                            pantalon.open();
+                                            pantalon.delete(contenu.getIdObjet());
+                                            pantalon.close();
+                                        } else {
+                                            AutreDAO autre = new AutreDAO(mContext);
+                                            autre.open();
+                                            autre.delete(contenu.getIdObjet());
+                                            autre.close();
+                                        }
+                                        mContenuList.remove(i);
+                                        mRecyclerView.getAdapter().notifyItemRemoved(i);
+                                        mRecyclerView.getAdapter().notifyItemRangeChanged(i, getItemCount());
+                                    }
+                                }
+                                actionMode.finish();
+                                mMultiSelector.clearSelections();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                actionMode.finish();
+                                mMultiSelector.clearSelections();
+                                break;
                         }
-                        mContenuList.remove(i);
-                        mRecyclerView.getAdapter().notifyItemRemoved(i);
-                        mRecyclerView.getAdapter().notifyItemRangeChanged(i, getItemCount());
                     }
-                }
+                };
 
-                mMultiSelector.clearSelections();
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("Êtes vous sûr(e) de vouloir supprimer ces éléments ?").setPositiveButton("Oui", dialogClickListener).setNegativeButton("Non", dialogClickListener).show();
+
+
                 return true;
             }
             return false;
@@ -140,11 +160,11 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
                     } else {
                         intent.putExtra(CONTENU_TYPE, "autre");
                     }
-                    ((Activity)mContext).startActivityForResult(intent, REQUEST_CODE_CONSULT_CONTENU);
+                    ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_CONSULT_CONTENU);
                 }
             }
         });
-        if (BitmapFactory.decodeFile(contenu.getImage())==null) {
+        if (BitmapFactory.decodeFile(contenu.getImage()) == null) {
             dressingViewHolder.mImageView.setImageResource(mContext.getResources().getIdentifier(contenu.getImage(), "drawable", mContext.getPackageName()));
         } else {
             dressingViewHolder.mImageView.setImageBitmap(BitmapFactory.decodeFile(contenu.getImage()));
@@ -172,7 +192,7 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
                 from(viewGroup.getContext()).
                 inflate(R.layout.contenu_card_item, viewGroup, false);
 
-        ImageView imgContenu = (ImageView)itemView.findViewById(R.id.imgContenuItem);
+        ImageView imgContenu = (ImageView) itemView.findViewById(R.id.imgContenuItem);
         imgContenu.setScaleType(ImageView.ScaleType.FIT_XY);
 
         return new DressingViewHolder(itemView);

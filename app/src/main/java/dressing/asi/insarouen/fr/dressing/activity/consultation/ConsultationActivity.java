@@ -271,6 +271,7 @@ public class ConsultationActivity extends AppCompatActivity {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent disconectIntent = new Intent(ConsultationActivity.this, ConnexionActivity.class);
+                                disconectIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(disconectIntent);
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:

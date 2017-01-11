@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,7 +78,7 @@ public class ContenuActivity extends AppCompatActivity {
 
         // Création de la liste contenant tous les vêtements du type voulu
         listeContenus = new ArrayList<>();
-        setContenu(idDressing);
+        setContenu();
 
         // Récupérer le recycler
         mRecyclerView = (RecyclerView) findViewById(R.id.cardContenuList);
@@ -100,7 +101,7 @@ public class ContenuActivity extends AppCompatActivity {
         }
     }
 
-    public void setContenu(int idDressing) {
+    public void setContenu() {
         switch (typeContenu) {
             case "Dressing Complet":
                 ContenuDAO contenu = new ContenuDAO(this);
@@ -217,7 +218,11 @@ public class ContenuActivity extends AppCompatActivity {
             if(resultCode == RESULT_CODE_DELETE_OK) {
                 Intent intent = getIntent();
                 int position = intent.getIntExtra(POSITION_LIST, 0);
-                listeContenus.remove(position);
+                if (position!=0) {
+                    listeContenus.remove(position);
+                } else {
+                    setContenu();
+                }
                 ContenuItemAdapter contenuItemAdapter = new ContenuItemAdapter(listeContenus, this, mRecyclerView);
                 mRecyclerView.setAdapter(contenuItemAdapter);
 
@@ -246,6 +251,7 @@ public class ContenuActivity extends AppCompatActivity {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent disconectIntent = new Intent(ContenuActivity.this, ConnexionActivity.class);
+                                disconectIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(disconectIntent);
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:

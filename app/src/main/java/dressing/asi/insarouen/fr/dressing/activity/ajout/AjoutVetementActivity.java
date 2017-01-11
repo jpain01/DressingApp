@@ -160,6 +160,7 @@ public class AjoutVetementActivity extends AppCompatActivity {
             cursor.close();
 
             ImageView imageView = (ImageView) findViewById(R.id.imgView);
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(BitmapFactory.decodeFile(pathImage));
         }
     }

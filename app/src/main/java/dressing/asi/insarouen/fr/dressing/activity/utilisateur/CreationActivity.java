@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import dressing.asi.insarouen.fr.dressing.R;
 import dressing.asi.insarouen.fr.dressing.activity.accueil.AccueilActivity;
@@ -100,6 +101,7 @@ public class CreationActivity extends AppCompatActivity {
                             // Redirection vers l'accueil
                             Intent intent = new Intent(CreationActivity.this,AccueilActivity.class);
                             intent.putExtra("ID",u.isCorrectUser(mdp, identifiant));
+                            Toast.makeText(getApplicationContext(), "Compte créé avec succès :)", Toast.LENGTH_LONG).show();
                             startActivity(intent);
                             nomV.setError(null);
                             prenomV.setError(null);
