@@ -1,3 +1,6 @@
+DROP TRIGGER desattribuerFormesP;
+DROP TRIGGER desattribuerFormesH;
+DROP TRIGGER desattribuerFormesA;
 DROP TRIGGER attribuerFormesALongue;
 DROP TRIGGER attribuerFormesA;
 DROP TRIGGER attribuerFormesPEvase;

@@ -1,5 +1,6 @@
 package dressing.asi.insarouen.fr.dressing.data.dao.contenu;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +25,7 @@ import dressing.asi.insarouen.fr.dressing.elements.vetement.Niveau;
 
 public class VetementDAO extends ContenuDAO {
     public static final String KEY = "idObjet";
+    public static final String DRESSING = "idDressing";
     public static final String MATIERE = "matiere";
     public static final String COUCHE = "couche";
     public static final String NIVEAU = "niveau";
@@ -92,6 +94,14 @@ public class VetementDAO extends ContenuDAO {
         res.close();
         mDb.close();
         return resultat;
+    }
+
+    public void updtadeSalePropre(Vetement v) {
+        SQLiteDatabase mDb = open();
+        ContentValues cv = new ContentValues();
+        cv.put(SALE_PROPRE,v.isSale() ? 1 : 0);
+        mDb.update(this.getTableName(v), cv, DRESSING + "=? and " + KEY + "=?", new String[] {String.valueOf(v.getIdDressing()), String.valueOf(v.getIdObjet())});
+        mDb.close();
     }
 
     @Override

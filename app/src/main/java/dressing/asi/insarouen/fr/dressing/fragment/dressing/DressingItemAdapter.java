@@ -1,8 +1,6 @@
 package dressing.asi.insarouen.fr.dressing.fragment.dressing;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -16,15 +14,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import dressing.asi.insarouen.fr.dressing.R;
-import dressing.asi.insarouen.fr.dressing.fragment.contenu.ContenuFragment;
+import dressing.asi.insarouen.fr.dressing.activity.contenu.ContenuActivity;
 
 /**
  * Created by julie on 15/12/16.
  */
 
 public class DressingItemAdapter extends RecyclerView.Adapter<DressingItemAdapter.DressingViewHolder> {
-    public static final String USER_ID = "id";
-    public static final String TYPE_CONTENU = "type";
+    public static final String USER_ID = "user_id";
+    public static final String TYPE_CONTENU = "type_contenu";
     private List<DressingItem> mDressingList;
     private Context mContext;
 
@@ -45,19 +43,13 @@ public class DressingItemAdapter extends RecyclerView.Adapter<DressingItemAdapte
         dressingViewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Appel de l'activité contenu
+                Intent intent = new Intent(mContext, ContenuActivity.class);
+                intent.putExtra(USER_ID, item.getIdUtilisateur());
+                intent.putExtra(TYPE_CONTENU, item.getTitle());
+                mContext.startActivity(intent);
 
-                ContenuFragment contenuFragment = null;
-                contenuFragment = ContenuFragment.newInstance(item.getIdUtilisateur(),item.getTitle());
-                // récupération du manager
-                FragmentManager fragmentManager = ((Activity) mContext).getFragmentManager();
-                // Commençons une transaction
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                // Remplace notre vue par le fragment qu'on veut
-                fragmentTransaction.replace(R.id.frame, contenuFragment);
-
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
             }
         });
         dressingViewHolder.mImageView.setImageResource(mContext.getResources().getIdentifier(item.getIcon(), "drawable", mContext.getPackageName()));

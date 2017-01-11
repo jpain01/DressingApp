@@ -1,8 +1,8 @@
-package dressing.asi.insarouen.fr.dressing.fragment.contenu;
+package dressing.asi.insarouen.fr.dressing.activity.contenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -39,6 +39,8 @@ import dressing.asi.insarouen.fr.dressing.data.model.contenu.vetement.Pantalon;
  */
 
 public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.DressingViewHolder> {
+    public static final int REQUEST_CODE_CONSULT_CONTENU = 1;
+    public static final String POSITION_LIST = "position_list";
     public static final String CONTENU_ID = "id";
     public static final String CONTENU_TYPE = "type";
     public static final String DRESSING_ID = "dressing_id";
@@ -52,14 +54,7 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             super.onCreateActionMode(actionMode, menu);
             ((AppCompatActivity)mContext).getMenuInflater().inflate(R.menu.menu_delete_contenu, menu);
-            ((AppCompatActivity)mContext).getSupportActionBar().hide();
             return true;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode){
-            super.onDestroyActionMode(mode);
-            ((AppCompatActivity)mContext).getSupportActionBar().show();
         }
 
         @Override
@@ -123,7 +118,7 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final DressingViewHolder dressingViewHolder, int position) {
+    public void onBindViewHolder(final DressingViewHolder dressingViewHolder, final int position) {
         final Contenu contenu = mContenuList.get(position);
         // On click sur la card view
         dressingViewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +128,7 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
                     Intent intent = new Intent(mContext, ConsultationActivity.class);
                     intent.putExtra(CONTENU_ID, contenu.getIdObjet());
                     intent.putExtra(DRESSING_ID, contenu.getIdDressing());
+                    intent.putExtra(POSITION_LIST, position);
                     if (contenu instanceof Sac) {
                         intent.putExtra(CONTENU_TYPE, "sac");
                     } else if (contenu instanceof Chaussures) {
@@ -144,7 +140,7 @@ public class ContenuItemAdapter extends RecyclerView.Adapter<ContenuItemAdapter.
                     } else {
                         intent.putExtra(CONTENU_TYPE, "autre");
                     }
-                    mContext.startActivity(intent);
+                    ((Activity)mContext).startActivityForResult(intent, REQUEST_CODE_CONSULT_CONTENU);
                 }
             }
         });

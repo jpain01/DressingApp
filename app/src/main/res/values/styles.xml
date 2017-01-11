@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,6 +12,8 @@
         <item name="colorAccent">@color/colorFushia</item>
         <item name="android:actionButtonStyle">@style/myActionButtonStyle</item>
         <item name="actionButtonStyle">@style/myActionButtonStyle</item>
+        <!--  Pour que action mode overlay la toolbar -->
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">

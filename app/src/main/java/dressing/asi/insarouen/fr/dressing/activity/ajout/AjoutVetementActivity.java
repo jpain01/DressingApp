@@ -128,11 +128,11 @@ public class AjoutVetementActivity extends AppCompatActivity {
                 Intent i = new Intent(
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
 
+        // Validation
         validerButton.setOnClickListener(new CreationVetementListener());
     }
 
@@ -203,8 +203,8 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         intentH.putExtra(CONTENU_ID, h.getIdObjet());
                         intentH.putExtra(DRESSING_ID, h.getIdDressing());
                         intentH.putExtra(CONTENU_TYPE, "haut");
-                        intentH.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(intentH);
+                        startActivity(intentH);
+                        finish();
                         break;
                     case "jupe":
                     case "short":
@@ -223,8 +223,8 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         intentA.putExtra(CONTENU_ID, a.getIdObjet());
                         intentA.putExtra(DRESSING_ID, a.getIdDressing());
                         intentA.putExtra(CONTENU_TYPE, "autre");
-                        intentA.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(intentA);
+                        startActivity(intentA);
+                        finish();
                         break;
                     default:
                         // Creation de l'objet Pantalon
@@ -239,9 +239,8 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         Intent intentP = new Intent(getApplicationContext(), ConsultationActivity.class);
                         intentP.putExtra(CONTENU_ID, p.getIdObjet());
                         intentP.putExtra(DRESSING_ID, p.getIdDressing());
-                        intentP.putExtra(CONTENU_TYPE, "pantalon");
-                        intentP.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getApplicationContext().startActivity(intentP);
+                        startActivity(intentP);
+                        finish();
                         break;
                 }
             }

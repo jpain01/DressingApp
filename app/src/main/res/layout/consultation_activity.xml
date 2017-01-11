@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -19,138 +20,160 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:background="@color/colorPearlyWhite"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
-            android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:paddingBottom="2dp"
-            android:background="@android:color/white">
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="250dp"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:scaleType="fitXY"
-                android:layout_centerInParent="true"/>
+                android:layout_centerHorizontal="true"/>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_below="@+id/imageView"
+                android:background="@color/colorFushia"/>
+
+
+            <RelativeLayout
+                android:id="@+id/description"
+                android:layout_below="@+id/line"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+                android:paddingTop="40dp"
+                android:paddingRight="60dp"
+                android:paddingLeft="60dp"
+                android:background="@color/colorPearlyWhite">
+
+                <TextView
+                    android:id="@+id/typeContenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/colorFushia"
+                    android:textStyle="bold"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/labelCouleur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/typeContenu"
+                    android:textColor="@color/colorFushia"
+                    android:text="@string/couleur"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/couleur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorFushia"
+                    android:layout_below="@+id/typeContenu"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/labelType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/couleur"
+                    android:textColor="@color/colorFushia"
+                    android:text="@string/type"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorFushia"
+                    android:layout_below="@+id/couleur"
+                    android:textSize="15sp"/>
+
+
+                <TextView
+                    android:id="@+id/labelCoupe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/type"
+                    android:textColor="@color/colorFushia"
+                    android:text="@string/coupe"
+                    android:visibility="invisible"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/coupe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorFushia"
+                    android:layout_below="@+id/type"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/labelMatiere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/coupe"
+                    android:textColor="@color/colorFushia"
+                    android:text="@string/matiere"
+                    android:visibility="invisible"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/matiere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorFushia"
+                    android:layout_below="@+id/coupe"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_below="@+id/image"
-            android:background="@color/colorFushia"
-            >
+    </ScrollView>
 
-        </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/suppContenu"
+        android:layout_margin="12dp"
+        android:src="@drawable/delete"
+        app:layout_anchor="@id/line"
+        app:backgroundTint="@color/colorFushia"
+        app:elevation="2dp"
+        app:layout_anchorGravity="bottom|right|end"/>
 
-        <RelativeLayout
-            android:id="@+id/description"
-            android:layout_below="@+id/line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingTop="40dp"
-            android:paddingRight="60dp"
-            android:paddingLeft="60dp">
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/corbeilleContenu"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="80dp"
+        android:src="@drawable/corbeille_white_empty"
+        app:backgroundTint="@color/colorFushia"
+        android:visibility="invisible"
+        app:layout_anchor="@id/line"
+        app:elevation="2dp"
+        app:layout_anchorGravity="bottom|right|end"/>
 
-            <TextView
-                android:id="@+id/typeContenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:paddingBottom="10dp"
-                android:textColor="@color/colorFushia"
-                android:textStyle="bold"
-                android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/labelCouleur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/typeContenu"
-                android:textColor="@color/colorFushia"
-                android:text="@string/couleur"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/couleur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorFushia"
-                android:layout_below="@+id/typeContenu"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/labelType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/couleur"
-                android:textColor="@color/colorFushia"
-                android:text="@string/type"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorFushia"
-                android:layout_below="@+id/couleur"
-                android:textSize="15sp"/>
-
-
-            <TextView
-                android:id="@+id/labelCoupe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/type"
-                android:textColor="@color/colorFushia"
-                android:text="@string/coupe"
-                android:visibility="invisible"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/coupe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorFushia"
-                android:layout_below="@+id/type"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/labelMatiere"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/coupe"
-                android:textColor="@color/colorFushia"
-                android:text="@string/matiere"
-                android:visibility="invisible"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/matiere"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorFushia"
-                android:layout_below="@+id/coupe"
-                android:textSize="15sp"/>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

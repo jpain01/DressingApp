@@ -1,5 +1,6 @@
 package dressing.asi.insarouen.fr.dressing.data.model;
 
+import dressing.asi.insarouen.fr.dressing.data.model.contenu.Vetement;
 import dressing.asi.insarouen.fr.dressing.elements.Couleur;
 
 /**

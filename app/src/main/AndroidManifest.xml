@@ -36,6 +36,8 @@
             android:label="Ajout vêtements"/>
         <activity android:name=".activity.consultation.ConsultationActivity"
             android:label="Consultation"/>
+        <activity android:name=".activity.contenu.ContenuActivity"
+            android:label="Contenu"/>
     </application>
 
 </manifest>

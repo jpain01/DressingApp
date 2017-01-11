@@ -133,7 +133,8 @@ public class AjoutChaussuresActivity extends AppCompatActivity {
                 intent.putExtra(DRESSING_ID, c.getIdDressing());
                 intent.putExtra(CONTENU_TYPE, "chaussures");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
+                startActivity(intent);
+                finish();
             }
         }
     }

@@ -23,14 +23,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textNotice"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="15dp"
-            android:textColor="@color/colorFushia"
-            android:background="@drawable/shape_notice" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/colorFushia"
+                android:background="@drawable/shape_notice" />
+
+        </LinearLayout>
 
     </ScrollView>
 

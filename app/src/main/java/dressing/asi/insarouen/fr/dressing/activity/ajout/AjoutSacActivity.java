@@ -133,7 +133,8 @@ public class AjoutSacActivity extends AppCompatActivity {
                 intent.putExtra(DRESSING_ID, s.getIdDressing());
                 intent.putExtra(CONTENU_TYPE, "sac");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
+                startActivity(intent);
+                finish();
             }
 
         }

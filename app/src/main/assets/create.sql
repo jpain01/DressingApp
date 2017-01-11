@@ -95,19 +95,19 @@ CREATE TABLE IF NOT EXISTS AUTRE (
 --Creation associations
 
 CREATE TABLE IF NOT EXISTS CORRESPOND_PANTALON (
-        idObjet INTEGER,
+        idObjet INTEGER REFERENCES PANTALON(idObjet) ON DELETE CASCADE,
         signe VARCHAR(5) REFERENCES PANTALON(signe) ON DELETE CASCADE,
         PRIMARY KEY (idObjet,signe)
 );
 
 CREATE TABLE IF NOT EXISTS CORRESPOND_AUTRE (
-        idObjet INTEGER,
+        idObjet INTEGER REFERENCES AUTRE(idObjet) ON DELETE CASCADE,
         signe VARCHAR(5) REFERENCES AUTRE(signe) ON DELETE CASCADE,
         PRIMARY KEY (idObjet,signe)
 );
 
 CREATE TABLE IF NOT EXISTS CORRESPOND_HAUT (
-        idObjet INTEGER,
+        idObjet INTEGER REFERENCES AUTRE(idObjet) ON DELETE CASCADE,
         signe VARCHAR(5) REFERENCES HAUT(signe) ON DELETE CASCADE,
         PRIMARY KEY (idObjet,signe)
 );
@@ -211,8 +211,6 @@ UPDATE MATIERE_SAISON SET saison='Printemps/Ete' WHERE matiere='Lin';
 	END;
 
 
-
-
 -- Permet d'attribuer à chaque vetement les formes qui lui correspondent selon sa coupe
 CREATE TRIGGER IF NOT EXISTS attribuerFormesH
         AFTER INSERT ON HAUT
@@ -311,4 +309,27 @@ CREATE TRIGGER IF NOT EXISTS attribuerFormesALongue
         INSERT INTO CORRESPOND_AUTRE VALUES (NEW.idobjet,'A');
         INSERT INTO CORRESPOND_AUTRE VALUES (NEW.idobjet,'V');
 	END;
+
+-- Lorsqu'un vetement est supprimé, son instance dans correspond doit être supprimé également
+CREATE TRIGGER IF NOT EXISTS desattribuerFormesH
+        BEFORE DELETE ON HAUT
+	FOR EACH ROW         
+	BEGIN 
+        DELETE FROM CORRESPOND_HAUT WHERE idobjet=OLD.idobjet;
+        END;
+
+CREATE TRIGGER IF NOT EXISTS desattribuerFormesA
+        BEFORE DELETE ON AUTRE
+	FOR EACH ROW         
+	BEGIN 
+        DELETE FROM CORRESPOND_AUTRE WHERE idobjet=OLD.idobjet;
+        END;
+
+CREATE TRIGGER IF NOT EXISTS desattribuerFormesP
+        BEFORE DELETE ON PANTALON
+	FOR EACH ROW         
+	BEGIN 
+        DELETE FROM CORRESPOND_PANTALON WHERE idobjet=OLD.idobjet;
+        END;
+
 

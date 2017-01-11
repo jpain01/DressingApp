@@ -11,6 +11,8 @@
     <color name="colorGreyBlue">#CCCCFF</color>
     <color name="colorPink">#FF99FF</color>
     <color name="colorYellow">#FFFFCC</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPearlyWhite">#cdb39f</color>
     <!-- my transparent colors -->
     <color name="colorGreyBlueTransparent">#DDCCCCFF</color>
     <color name="colorWhiteTransparent">#CCFFFFFF</color>
