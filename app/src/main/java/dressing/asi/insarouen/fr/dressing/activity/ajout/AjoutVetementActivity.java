@@ -240,6 +240,7 @@ public class AjoutVetementActivity extends AppCompatActivity {
                         Intent intentP = new Intent(getApplicationContext(), ConsultationActivity.class);
                         intentP.putExtra(CONTENU_ID, p.getIdObjet());
                         intentP.putExtra(DRESSING_ID, p.getIdDressing());
+                        intentP.putExtra(CONTENU_TYPE, "pantalon");
                         startActivity(intentP);
                         finish();
                         break;

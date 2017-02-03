@@ -53,6 +53,17 @@ public class ContenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.contenu_list_activity);
 
+        // Récupération des entrées
+        Intent intent = getIntent();
+        userId = intent.getIntExtra(USER_ID, 0);
+        typeContenu = intent.getStringExtra(TYPE_CONTENU);
+
+        // Récupération de l'identifiant du dressing de l'utilisateur courant
+        UtilisateurDAO u = new UtilisateurDAO(this);
+        u.open();
+        idDressing = u.getIdDressing(userId);
+        u.close();
+
         // Coucou je veux que mon action bar soit celle-ci :)
         final Toolbar toolbar = (Toolbar) findViewById(R.id.dressingToolbar);
         setSupportActionBar(toolbar);
@@ -64,17 +75,6 @@ public class ContenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
-
-        // Récupération des entrées
-        Intent intent = getIntent();
-        userId = intent.getIntExtra(USER_ID, 0);
-        typeContenu = intent.getStringExtra(TYPE_CONTENU);
-
-        // Récupération de l'identifiant du dressing de l'utilisateur courant
-        UtilisateurDAO u = new UtilisateurDAO(this);
-        u.open();
-        idDressing = u.getIdDressing(userId);
-        u.close();
 
         // Création de la liste contenant tous les vêtements du type voulu
         listeContenus = new ArrayList<>();
@@ -216,9 +216,8 @@ public class ContenuActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == ContenuItemAdapter.REQUEST_CODE_CONSULT_CONTENU){
             if(resultCode == RESULT_CODE_DELETE_OK) {
-                Intent intent = getIntent();
-                int position = intent.getIntExtra(POSITION_LIST, 0);
-                if (position!=0) {
+                int position = data.getIntExtra(POSITION_LIST, -1);
+                if (position!=-1) {
                     listeContenus.remove(position);
                 } else {
                     setContenu();

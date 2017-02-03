@@ -22,6 +22,7 @@ import dressing.asi.insarouen.fr.dressing.data.model.Utilisateur;
 import dressing.asi.insarouen.fr.dressing.elements.utilisateur.Morphologie;
 import dressing.asi.insarouen.fr.dressing.fragment.dressing.AccueilDressingFragment;
 
+import static dressing.asi.insarouen.fr.dressing.activity.accueil.AccueilActivity.MENU_ACCUEIL;
 import static dressing.asi.insarouen.fr.dressing.activity.accueil.AccueilActivity.MENU_DRESSING;
 
 public class AccueilFragment extends Fragment {
@@ -52,6 +53,10 @@ public class AccueilFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_accueil, container, false);
+
+        // Dire que l'accueil est sélectionné
+        ListView mDrwDrawerList = (ListView) getActivity().findViewById(R.id.drwLvDrawerList);
+        mDrwDrawerList.setItemChecked(MENU_ACCUEIL, true);
 
         // Récupération des boutons
         Button dressingB = (Button) view.findViewById(R.id.dressing);
@@ -134,9 +139,11 @@ public class AccueilFragment extends Fragment {
             ListView mDrwDrawerList = (ListView) getActivity().findViewById(R.id.drwLvDrawerList);
             mDrwDrawerList.setItemChecked(MENU_DRESSING, true);
 
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.addToBackStack(Integer.toString(MENU_DRESSING));
             fragmentTransaction.commit();
         }
     }
+
+
 
 }

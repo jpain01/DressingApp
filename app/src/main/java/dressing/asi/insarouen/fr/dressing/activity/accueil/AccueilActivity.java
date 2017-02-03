@@ -1,5 +1,6 @@
 package dressing.asi.insarouen.fr.dressing.activity.accueil;
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dressing.asi.insarouen.fr.dressing.R;
 import dressing.asi.insarouen.fr.dressing.activity.notice.NoticeActivity;
@@ -119,7 +121,7 @@ public class AccueilActivity extends AppCompatActivity {
                             if(position != null)
                                 mDrwDrawerList.setItemChecked(Integer.parseInt(position), true);
 
-                        } else {
+                        } else if (getFragmentManager().getBackStackEntryCount() == 0) {
                             mDrwDrawerList.setItemChecked(MENU_ACCUEIL, true);
 
                             //Pour avoir le burger

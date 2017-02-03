@@ -82,7 +82,7 @@ public class CreationActivity extends AppCompatActivity {
                         mdpV.setError("veuillez remplir un mot de passe");
                     }
                     if (confirmMdp.length() == 0) {
-                        mdpV.setError("veuillez confirmer le mot de passe");
+                        confirmMdpV.setError("veuillez confirmer le mot de passe");
                     }
                 } else {
                     // Test si le mot de passe de confirmation est le même que le premier mot de passe
@@ -101,8 +101,8 @@ public class CreationActivity extends AppCompatActivity {
                             // Redirection vers l'accueil
                             Intent intent = new Intent(CreationActivity.this,AccueilActivity.class);
                             intent.putExtra("ID",u.isCorrectUser(mdp, identifiant));
-                            Toast.makeText(getApplicationContext(), "Compte créé avec succès :)", Toast.LENGTH_LONG).show();
                             startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Compte créé avec succès :)", Toast.LENGTH_LONG).show();
                             nomV.setError(null);
                             prenomV.setError(null);
                             identifiantV.setError(null);
